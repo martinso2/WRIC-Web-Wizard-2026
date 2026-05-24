@@ -806,28 +806,35 @@ function CoverStep({ onStart, data, set }) {
             </p>
           )}
 
-          {solo && (
-            <div className="respondent-card">
-              <div className="head">
-                Your name & role
-                {t.senderName && <span className="sender">— requested by {t.senderName}</span>}
-              </div>
-              <div className="row">
-                <label>
-                  Your name
-                  <input type="text" value={data.respondent_name || ""}
-                         onChange={e => set("respondent_name", e.target.value)}
-                         placeholder="Jane Q. Trustee" />
-                </label>
-                <label>
-                  Your role at WRIC
-                  <input type="text" value={data.respondent_role || ""}
-                         onChange={e => set("respondent_role", e.target.value)}
-                         placeholder="Board Vice Chair" />
-                </label>
-              </div>
+          <div className="respondent-card">
+            <div className="head">
+              Your contact information
+              {t.senderName && <span className="sender">— requested by {t.senderName}</span>}
             </div>
-          )}
+            <p className="privacy-note">
+              Your responses will be kept confidential. Name and email are collected only so the survey results can be organized and shared back with the group.
+            </p>
+            <div className="row">
+              <label>
+                Your name
+                <input type="text" value={data.respondent_name || ""}
+                       onChange={e => set("respondent_name", e.target.value)}
+                       placeholder="Jane Q. Trustee" />
+              </label>
+              <label>
+                Email
+                <input type="email" value={data.respondent_email || ""}
+                       onChange={e => set("respondent_email", e.target.value)}
+                       placeholder="jane@example.org" />
+              </label>
+              <label>
+                Your role at WRIC
+                <input type="text" value={data.respondent_role || ""}
+                       onChange={e => set("respondent_role", e.target.value)}
+                       placeholder="Board Vice Chair" />
+              </label>
+            </div>
+          </div>
 
           <div className="meta-row">
             <div className="item">
@@ -1341,6 +1348,9 @@ function ReviewStep({ data, reset }) {
           <button type="button" className="btn btn-ghost" onClick={() => {
             if (confirm("Clear all your answers? This cannot be undone.")) {
               localStorage.removeItem(STORAGE_KEY);
+              if (window.WorkbookFirebase) {
+                window.WorkbookFirebase.resetResponseId();
+              }
               location.reload();
             }
           }}>Reset workbook</button>
@@ -1351,6 +1361,97 @@ function ReviewStep({ data, reset }) {
 }
 
 /* ---------- Close ---------- */
+const RESULT_FIELDS = [
+  { key: "primary_goal", label: "Primary website job" },
+  { key: "uvp_problem", label: "Core problem" },
+  { key: "uvp_approach", label: "Most effective approach" },
+  { key: "path_new_action", label: "New client path" },
+  { key: "path_donor_action", label: "Potential donor path" },
+  { key: "path_existing_action", label: "Existing client path" },
+  { key: "action_cta", label: "Primary call to action" },
+  { key: "legacy_goal", label: "Redesign goal" },
+  { key: "complete_relationship", label: "Homepage relationship" },
+];
+
+function ResultsSnapshot() {
+  const [state, setState] = React.useState({
+    error: "",
+    loading: true,
+    summaries: [],
+  });
+
+  React.useEffect(() => {
+    let mounted = true;
+    if (!window.WorkbookFirebase || !window.WorkbookFirebase.getPublicSummaries) {
+      setState({ error: "Results are available after Firebase sync is enabled.", loading: false, summaries: [] });
+      return () => { mounted = false; };
+    }
+
+    window.WorkbookFirebase.getPublicSummaries()
+      .then((summaries) => {
+        if (mounted) setState({ error: "", loading: false, summaries });
+      })
+      .catch(() => {
+        if (mounted) {
+          setState({ error: "Results are not available yet. Check Firebase Auth and database rules.", loading: false, summaries: [] });
+        }
+      });
+
+    return () => { mounted = false; };
+  }, []);
+
+  const rows = React.useMemo(() => {
+    const countValues = (key) => {
+      const counts = {};
+      state.summaries.forEach((summary) => {
+        const value = summary.answers && summary.answers[key];
+        const values = Array.isArray(value) ? value : (value ? [value] : []);
+        values.forEach((item) => {
+          counts[item] = (counts[item] || 0) + 1;
+        });
+      });
+      return Object.keys(counts)
+        .map((value) => ({ value, count: counts[value] }))
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 3);
+    };
+
+    return RESULT_FIELDS
+      .map((field) => ({ ...field, results: countValues(field.key) }))
+      .filter((field) => field.results.length > 0);
+  }, [state.summaries]);
+
+  return (
+    <div className="results-panel">
+      <h3>Group results so far</h3>
+      {state.loading && <p>Loading results...</p>}
+      {!state.loading && state.error && <p>{state.error}</p>}
+      {!state.loading && !state.error && (
+        <>
+          <p>{state.summaries.length} response{state.summaries.length === 1 ? "" : "s"} received.</p>
+          {rows.length === 0 ? (
+            <p>No aggregate results are available yet.</p>
+          ) : (
+            <div className="results-grid">
+              {rows.map((row) => (
+                <div className="result-card" key={row.key}>
+                  <div className="result-label">{row.label}</div>
+                  {row.results.map((result) => (
+                    <div className="result-row" key={result.value}>
+                      <span>{result.value}</span>
+                      <strong>{result.count}</strong>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
 function CloseStep({ data }) {
   return (
     <section className="step">
@@ -1361,6 +1462,8 @@ function CloseStep({ data }) {
 
       <div className="step-body">
         <div className="exercise">
+          <ResultsSnapshot />
+
           <h3>Where the rest of the content goes</h3>
           <div className="channel-grid">
             {CHANNELS.map(c => (

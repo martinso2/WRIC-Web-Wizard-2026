@@ -1392,6 +1392,57 @@ input::placeholder, textarea::placeholder {
   line-height: 1.45;
 }
 
+.results-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  margin: 0 0 28px;
+}
+.results-panel h3 {
+  margin-top: 0;
+}
+.results-panel p {
+  color: var(--ink-soft);
+  margin-top: 0;
+}
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+@media (max-width: 720px) {
+  .results-grid { grid-template-columns: 1fr; }
+}
+.result-card {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 14px;
+}
+.result-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--coral-deep);
+  margin-bottom: 10px;
+}
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.35;
+}
+.result-row strong {
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+}
+
 .commitment {
   background: var(--surface);
   border: 2px solid var(--navy);
@@ -1496,7 +1547,7 @@ input::placeholder, textarea::placeholder {
 .app[data-density="generous"] .step-body { gap: 64px; }
 .app[data-density="generous"] .exercise h3 { margin-top: 48px; font-size: 32px; }
 
-/* Respondent identity block on the cover (solo mode) */
+/* Respondent identity block on the cover */
 .respondent-card {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -1521,10 +1572,16 @@ input::placeholder, textarea::placeholder {
 }
 .respondent-card .row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
 @media (max-width: 640px) { .respondent-card .row { grid-template-columns: 1fr; } }
+.respondent-card .privacy-note {
+  margin: 0 0 14px;
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.45;
+}
 .respondent-card label {
   display: flex;
   flex-direction: column;

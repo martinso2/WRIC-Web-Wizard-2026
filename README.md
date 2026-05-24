@@ -163,8 +163,11 @@ To add a new section:
 
 - All answers are kept in a single React state object: `{ uvp_problem: "…", discovery: [...], primary_goal: "donate", … }`
 - Persisted to `localStorage` under key `nonprofit-workbook-v2` on every change
+- Synced to Firebase Realtime Database under `workbookResponses/{anonymousUid}/{responseId}` when Firebase Auth and Database are enabled
 - Current step index persists under `nonprofit-workbook-v2-idx`
 - `set(key, val)` and `toggle(key, val)` are the only mutators
+
+Firebase sync uses anonymous auth. Enable the Anonymous provider in Firebase Authentication and publish the Realtime Database rules in `database.rules.json` before relying on remote saves.
 
 The review step also exports answers as JSON (`workbook-brief.json`) and supports `window.print()` for PDF export (a print stylesheet hides chrome).
 

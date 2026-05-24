@@ -85,7 +85,7 @@ const UVP_DRILLS = [
   },
   {
     id: "uvp_feel",
-    prompt: "What single feeling should visitors walk away with?",
+    prompt: "What single feeling should web visitors come away with?",
     options: [
       "Hope",
       "Trust",
@@ -97,7 +97,7 @@ const UVP_DRILLS = [
 const PRIMARY_GOALS = [
   { id: "donate",    name: "Raise donations",                    sub: "Individual giving, year-end appeals, recurring." },
   { id: "found",     name: "Build credibility with funders",     sub: "Foundations, major donors, institutional support." },
-  { id: "enroll",    name: "Enroll Clients",                     sub: "Sign-ups, intake forms, service access." },
+  { id: "enroll",    name: "Enroll Additional Clients",                     sub: "Sign-ups, intake forms, service access." },
   { id: "volunteer", name: "Recruit volunteers",                 sub: "Hands, hours, expertise from the community." },
   { id: "resource",  name: "Educate the community",                sub: "Guides, referrals, downloadable tools." },
 ];
@@ -136,7 +136,7 @@ const PATHWAY_NEW_CLIENT = [
 
 const PATHWAY_POTENTIAL_DONOR = [
   "Understand the impact of a donation",
-  "See proof that gifts are used well",
+  "See proof that donations are used well",
   "Find a clear donate button",
   "Learn about recurring giving",
   "See who funds or partners with us",
@@ -153,7 +153,7 @@ const PATHWAY_EXISTING_CLIENT = [
 const TRUST_SIGNALS = [
   "Phone number in the header — clickable on mobile",
   "Hours of operation, in plain text",
-  "A second or third language line to serve a bilingual or trilingual community",
+  "A second or third language line to serve more languages",
   "The word \"confidential\" near the contact info",
   "A physical address that shows you're real and local",
   "An emergency referral (hotline) for crisis moments",
@@ -179,7 +179,7 @@ const ONEPAGER_CHECKS = [
 ];
 
 const STAFF_CHECKS = [
-  "Each bio is short, human, and reinforces our mission — not a résumé",
+  "Each bio is short, and reflects our mission — not a résumé",
   "Photos are recent, warm, and consistent in style",
   "We avoid buzzwords like \"passionate change-maker\"",
   "Titles are real, plain-English, and unambiguous",
@@ -190,7 +190,7 @@ const BOARD_CHECKS = [
   "Every name is current — no one who rotated off years ago",
   "Photos for every member (or no photos at all — consistency wins)",
   "Affiliations show stability and community ties",
-  "The page signals trust to a funder doing due diligence in 60 seconds",
+  "LinkedIn profiles for each member (or no profiles at all — consistency wins)",
 ];
 
 const SHOT_LIST = [

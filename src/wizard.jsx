@@ -18,8 +18,28 @@ function useWorkbook() {
       return raw ? JSON.parse(raw) : {};
     } catch { return {}; }
   });
+  const firebaseSaveTimer = useRef(null);
+
   useEffect(() => {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch {}
+
+    if (firebaseSaveTimer.current) {
+      clearTimeout(firebaseSaveTimer.current);
+    }
+
+    if (window.WorkbookFirebase && Object.keys(data).length > 0) {
+      firebaseSaveTimer.current = setTimeout(() => {
+        window.WorkbookFirebase.save(data).catch((error) => {
+          console.warn("Firebase workbook sync failed:", error);
+        });
+      }, 800);
+    }
+
+    return () => {
+      if (firebaseSaveTimer.current) {
+        clearTimeout(firebaseSaveTimer.current);
+      }
+    };
   }, [data]);
 
   const set = useCallback((key, val) => setData(d => ({ ...d, [key]: val })), []);
@@ -28,7 +48,12 @@ function useWorkbook() {
     if (s.has(val)) s.delete(val); else s.add(val);
     return { ...d, [key]: [...s] };
   }), []);
-  const reset = () => { setData({}); };
+  const reset = () => {
+    if (window.WorkbookFirebase) {
+      window.WorkbookFirebase.resetResponseId();
+    }
+    setData({});
+  };
   return { data, set, toggle, reset };
 }
 

@@ -1,0 +1,24 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "workbookResponses": {
+      "$uid": {
+        "$responseId": {
+          ".read": "auth != null && auth.uid === $uid",
+          ".write": "auth != null && auth.uid === $uid",
+          ".validate": "newData.hasChildren(['answers', 'createdAt', 'updatedAt'])"
+        }
+      }
+    },
+    "publicResponseSummaries": {
+      ".read": "auth != null",
+      "$uid": {
+        "$responseId": {
+          ".write": "auth != null && auth.uid === $uid",
+          ".validate": "newData.hasChildren(['answers', 'createdAt', 'updatedAt']) && !newData.child('answers').hasChild('respondent_email') && !newData.child('answers').hasChild('respondent_name') && !newData.child('answers').hasChild('respondent_role')"
+        }
+      }
+    }
+  }
+}
