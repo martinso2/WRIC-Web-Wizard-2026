@@ -650,11 +650,6 @@ function CoverStep({ onStart, data, set }) {
             <button type="button" className="btn btn-primary" onClick={onStart}>
              Start here →
             </button>
-            {t.showDesignNotes && (
-              <a href={EXAMPLE_SITE_URL} target="_blank" rel="noopener noreferrer" className="btn btn-link">
-                Open the example site in a new tab ↗
-              </a>
-            )}
           </div>
         </div>
 
