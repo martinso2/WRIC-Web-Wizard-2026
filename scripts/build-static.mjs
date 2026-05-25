@@ -2,11 +2,9 @@ import { cp, mkdir, rm } from "node:fs/promises";
 
 const filesToCopy = [
   "index.html",
-  "Nonprofit Website Workbook.html",
   "styles.css",
   "src",
   "assets",
-  "uploads",
 ];
 
 await rm("dist", { recursive: true, force: true });

@@ -133,7 +133,7 @@ function StepHeader({ num, label, title, lede }) {
 }
 
 /* ---------- FootNav ---------- */
-function FootNav({ idx, total, onPrev, onNext, steps = STEPS }) {
+function FootNav({ idx, total, onPrev, onNext, onDone, steps = STEPS }) {
   const step = steps[idx];
   const next = steps[idx + 1];
   const isLast = idx === total - 1;
@@ -147,8 +147,8 @@ function FootNav({ idx, total, onPrev, onNext, steps = STEPS }) {
           <span className="k">Now</span>
           <span className="v">{step.label}</span>
         </div>
-        <button type="button" className="btn btn-primary" onClick={onNext} disabled={isLast}>
-          {idx === 0 ? "Begin Workbook" : next ? `Next · ${next.label}` : "Done"} →
+        <button type="button" className="btn btn-primary" onClick={isLast ? onDone : onNext}>
+          {idx === 0 ? "Begin Workbook" : next ? `Next · ${next.label}` : "Submit response"} →
         </button>
       </div>
     </nav>
@@ -285,7 +285,7 @@ function DesignNote({ title, children, cite, hero = false }) {
       <h4>{title}</h4>
       {children}
       {/* <span className="ref">
-        <a href={PROTOTYPE_URL} target="_blank" rel="noopener noreferrer">View on the WRIC site →</a>
+        <a href={EXAMPLE_SITE_URL} target="_blank" rel="noopener noreferrer">View the example site →</a>
         {cite ? <span style={{ color: "var(--faint)" }}>· {cite}</span> : null}
       </span> */}
     </aside>

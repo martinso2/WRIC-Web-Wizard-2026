@@ -5,7 +5,7 @@
    an <div class="exercise"> column and an <aside class="notes-col">
    column containing one or more <DesignNote/> components.
 
-   Updated: Added 12 web design principles survey (Steps 08–19)
+   Updated: Added 8 effective website design principles survey
    as a dedicated "Design Brief" phase that feeds into the existing
    scope / brief flow.
    ============================================================ */
@@ -13,93 +13,65 @@
 
 /* ============================================================
    DESIGN PRINCIPLES DATA
-   12 principles used in the survey steps below.
+   8 principles used in the survey steps below.
    ============================================================ */
 
 const DESIGN_PRINCIPLES = [
   {
-    id: "focus",
+    id: "attention",
     num: "P1",
-    label: "Focus",
-    title: "One message wins every time",
-    sub: "Your website should do one thing — reinforce your brand and mission. It's not a bulletin board. Every extra thing you add competes with the most important thing.",
+    label: "Attention First",
+    title: "Earn attention before reading",
+    sub: "You do not earn reading. You earn attention. Design for the eye before the mind.",
   },
   {
-    id: "clarity",
+    id: "onegoal",
     num: "P2",
-    label: "Clarity",
-    title: "If it needs an explanation, redesign it",
-    sub: "A confused visitor leaves. Plain language, simple navigation, and a clear call to action mean clients find help without guessing.",
-  },
-  {
-    id: "trust",
-    num: "P3",
-    label: "Trust",
-    title: "Your website is your first handshake",
-    sub: "Clients in need are already anxious. A professional, warm design says \"you are safe here\" before a single word is read.",
+    label: "One Goal Per Screen",
+    title: "One question, one action",
+    sub: "Every section should answer one question or drive one action.",
   },
   {
     id: "mobile",
+    num: "P3",
+    label: "Mobile Is the Default",
+    title: "Design for mobile and thumbs first — desktops and mice second",
+    sub: "Start with mobile and expand upward.",
+  },
+  {
+    id: "show",
     num: "P4",
-    label: "Mobile first",
-    title: "Your clients are on their phones",
-    sub: "Most people in crisis reach for their phone, not a laptop. If your site doesn't work perfectly on a small screen, it fails the people who need it most.",
+    label: "Show, Then Explain",
+    title: "Let people understand before they read",
+    sub: "Use images, layout, icons, proof, and examples before paragraphs.",
   },
   {
-    id: "onepage",
+    id: "decisions",
     num: "P5",
-    label: "One page",
-    title: "Scroll is better than lost",
-    sub: "A single-page site keeps everyone on the same path. Visitors scroll instead of clicking through a maze — and they always know where they are.",
+    label: "Make Decisions Easy",
+    title: "Reduce choices and friction",
+    sub: "Reduce choices. Reduce navigation. Reduce clicks.",
   },
   {
-    id: "action",
+    id: "scanners",
     num: "P6",
-    label: "Action",
-    title: "Every page needs one clear next step",
-    sub: "A website without a call to action is a dead end. Visitors need to know exactly what to do next — call, apply, donate, or get help.",
+    label: "Design for Scanners",
+    title: "Assume users skim",
+    sub: "Use short headlines, visual anchors, spacing, and clear sections.",
   },
   {
-    id: "audience",
+    id: "trust",
     num: "P7",
-    label: "Audience",
-    title: "Design for your most vulnerable visitor",
-    sub: "Your site serves clients in crisis, board members reviewing governance, and donors evaluating impact. But if it works for someone in distress on a cheap phone — it works for everyone.",
+    label: "Trust Is a Design Feature",
+    title: "Credibility starts visually",
+    sub: "Professional visuals, consistency, real photography, outcomes, testimonials, and clear language build credibility.",
   },
   {
-    id: "simplicity",
+    id: "whitespace",
     num: "P8",
-    label: "Simplicity",
-    title: "White space is not wasted space",
-    sub: "Crowded pages feel chaotic and untrustworthy. Breathing room signals confidence. If every inch is filled, nothing stands out — and nothing gets done.",
-  },
-  {
-    id: "brand",
-    num: "P9",
-    label: "Brand",
-    title: "Your colors and fonts are your voice",
-    sub: "A consistent brand builds recognition. Using 8 fonts and 12 colors looks like a yard sale. Pick one color palette, one or two fonts, and stick to them everywhere.",
-  },
-  {
-    id: "impact",
-    num: "P10",
-    label: "Impact",
-    title: "Show the work, not just the words",
-    sub: "\"We helped 847 women last year\" is more powerful than \"We provide comprehensive legal services.\" Show real impact, in plain language.",
-  },
-  {
-    id: "legacy",
-    num: "P11",
-    label: "Legacy brand",
-    title: "Don't throw away what already works",
-    sub: "Your blue and white brand and your logo are already recognized by clients, funders, and the community. The goal is to modernize — not replace. Familiarity is a strategic asset you've earned over years.",
-  },
-  {
-    id: "complete",
-    num: "P12",
-    label: "Homepage completeness",
-    title: "The first page tells the whole story",
-    sub: "A visitor should never have to dig into other pages to understand who you are, what you do, and how to reach you. Everything essential lives on page one. Secondary pages — videos, calendars, photo galleries — add richness but are never required.",
+    label: "White Space Creates Understanding",
+    title: "Space helps people think",
+    sub: "Space is not empty. It helps people organize information and notice what matters.",
   },
 ];
 
@@ -108,33 +80,79 @@ const DESIGN_PRINCIPLES = [
    ============================================================ */
 
 const PRINCIPLE_QUESTIONS = {
-  focus: {
+  attention: {
     mc: {
-      label: "When a visitor lands on your site, what should they feel in the first 5 seconds?",
-      key: "focus_feeling",
+      label: "What should a visitor notice first?",
+      key: "attention_first",
       options: [
-        "Confident they're in the right place",
-        "Overwhelmed with options",
-        "Curious to explore everything",
-        "Immediately know how to get help",
+        "Who we are",
+        "Who we serve",
+        "How to get services",
+        "Why work matters",
+        "How to donate",
       ],
     },
   },
-  clarity: {
+  onegoal: {
     uvp: {
-      label: "Which of these homepage headlines works best?",
-      key: "clarity_headline",
+      label: "What should the first major section do?",
+      key: "onegoal_section",
       options: [
-        { title: '"Free legal help for women"', desc: "Clear, direct, specific" },
-        { title: '"Empowering communities through integrated support systems"', desc: "Vague, jargon-heavy" },
-        { title: '"WRIC: Your partner in justice"', desc: "Brand-forward but unclear" },
-        { title: '"Get the legal help you deserve — today"', desc: "Action-focused, urgent" },
+        { title: "Explain who WRIC helps", desc: "Make the audience clear first" },
+        { title: "Route people to services", desc: "Move quickly toward action" },
+        { title: "Build donor confidence", desc: "Lead with credibility and impact" },
+        { title: "Introduce the organization", desc: "Give context before action" },
       ],
     },
-    scale: {
-      label: "How many clicks should it take a client to find help?",
-      key: "clarity_clicks",
-      min: 1, max: 5, leftLabel: "1 click", rightLabel: "5+ clicks", defaultVal: 2,
+  },
+  mobile: {
+    uvp: {
+      label: "Where are people most likely to first view the website?",
+      key: "mobile_device",
+      options: [
+        { title: "Phone", desc: "On the go, perhapsunder stress, limited time" },
+        { title: "Laptop or desktop", desc: "Office or home setting" },
+        { title: "Tablet", desc: "Shared device, library" },
+        { title: "Not sure", desc: "We haven't measured" },
+      ],
+    },
+  },
+  show: {
+    mc: {
+      label: "What should we show before asking people to read?",
+      key: "show_first",
+      multi: true,
+      options: [
+        "Real people behind the work",
+        "Services at a glance",
+        "Impact numbers",
+        "A client story or testimonial",
+        "Clear icons or visual cues",
+      ],
+    },
+  },
+  decisions: {
+    mc: {
+      label: "Where can the new website reduce choices?",
+      key: "decisions_reduce",
+      options: [
+        "Navigation",
+        "Homepage calls to action",
+        "Service descriptions",
+        "Donation flow",
+      ],
+    },
+  },
+  scanners: {
+    mc: {
+      label: "Which design pattern would help skimmers most?",
+      key: "scanners_pattern",
+      options: [
+        "Short section headlines",
+        "Visual anchors",
+        "Clear section spacing",
+        "Plain-language labels",
+      ],
     },
   },
   trust: {
@@ -148,219 +166,19 @@ const PRINCIPLE_QUESTIONS = {
         "Logos of funders",
         "Years in service",
         "Clean, simple design",
-        "Certifications and awards",
-      ],
-    },
-    rank: {
-      label: "Rank these trust signals for your audience (drag to reorder)",
-      key: "trust_rank",
-      items: [
-        "Professional photography",
-        "Privacy and confidentiality notice",
-        "Funder and partner logos",
-        "Years of service",
+        "Clear confidentiality language",
       ],
     },
   },
-  mobile: {
-    uvp: {
-      label: "Where are your clients most likely discovering your website?",
-      key: "mobile_device",
-      options: [
-        { title: "Phone", desc: "On the go, in crisis, limited time" },
-        { title: "Laptop or desktop", desc: "Office or home setting" },
-        { title: "Tablet", desc: "Shared device, library" },
-        { title: "I don't know", desc: "We haven't measured" },
-      ],
-    },
-    scale: {
-      label: "How important is it that your site works perfectly on a phone?",
-      key: "mobile_importance",
-      min: 1, max: 5, leftLabel: "Nice to have", rightLabel: "Absolutely critical", defaultVal: 4,
-    },
-  },
-  onepage: {
+  whitespace: {
     mc: {
-      label: "What's your gut reaction to a one-page scrolling website?",
-      key: "onepage_reaction",
+      label: "How should the new website use space?",
+      key: "whitespace_style",
       options: [
-        "Modern and clean",
-        "Missing information",
-        "Easy to use",
-        "Too simple for a nonprofit",
-        "Perfect for clients in crisis",
-      ],
-    },
-    mc2: {
-      label: "Which sections belong on your one-pager? (pick all that apply)",
-      key: "onepage_sections",
-      multi: true,
-      options: [
-        "Mission and who we serve",
-        "Services at a glance",
-        "How to get help",
-        "Donate",
-        "Contact and location",
-        "News and events",
-        "Staff directory",
-        "Board of directors",
-      ],
-    },
-  },
-  action: {
-    uvp: {
-      label: "What is the single most important action a visitor should take?",
-      key: "action_cta",
-      options: [
-        { title: "Call us now", desc: "Immediate connection" },
-        { title: "Apply for services", desc: "Start the intake process" },
-        { title: "Donate", desc: "Support the mission" },
-        { title: "Get in touch", desc: "Start a conversation" },
-      ],
-    },
-  },
-  audience: {
-    rank: {
-      label: "Rank your audiences by who the website should serve first (drag to reorder)",
-      key: "audience_rank",
-      items: [
-        "Clients seeking services",
-        "Donors and funders",
-        "Community partners",
-        "Media and press",
-        "Board members",
-      ],
-    },
-  },
-  simplicity: {
-    uvp: {
-      label: "Which describes your current or ideal website?",
-      key: "simplicity_style",
-      options: [
-        { title: "Clean and minimal", desc: "Lots of space, big clear text, one thing at a time" },
-        { title: "Information-rich", desc: "Everything visible, comprehensive, detailed" },
-        { title: "Balanced", desc: "Core info up front, depth available if needed" },
-        { title: "News-style", desc: "Always updated, content-forward, dynamic" },
-      ],
-    },
-  },
-  brand: {
-    mc: {
-      label: "Which tone should your visual brand communicate?",
-      key: "brand_tone",
-      options: [
-        "Warm and welcoming",
-        "Authoritative and professional",
-        "Bold and activist",
-        "Calm and safe",
-        "Hopeful and empowering",
-      ],
-    },
-    mc2: {
-      label: "How many colors should define your brand online?",
-      key: "brand_colors",
-      options: [
-        "1–2 core colors",
-        "3–4 colors",
-        "5+ colors",
-        "No strong preference",
-      ],
-    },
-    rank: {
-      label: "Rank these brand elements by importance (drag to reorder)",
-      key: "brand_rank",
-      items: [
-        "Logo placement",
-        "Color consistency",
-        "Font choice",
-        "Photography style",
-      ],
-    },
-  },
-  impact: {
-    uvp: {
-      label: "Which impact statement is more compelling?",
-      key: "impact_statement",
-      options: [
-        { title: '"847 women helped last year"', desc: "Specific, measurable, credible" },
-        { title: '"Comprehensive legal services for women"', desc: "Descriptive but vague" },
-        { title: "A client's story in her own words", desc: "Emotional, personal, relatable" },
-        { title: "A visual chart of outcomes", desc: "Data-driven, board-friendly" },
-      ],
-    },
-  },
-  legacy: {
-    uvp: {
-      label: "Your current brand colors are blue and white. What should happen to them?",
-      key: "legacy_colors",
-      options: [
-        { title: "Keep them exactly as they are", desc: "Consistency above all — don't change a thing" },
-        { title: "Refine them slightly", desc: "Same family, modernized shades for screens" },
-        { title: "Add an accent color", desc: "Blue and white stay primary, a warm tone supports" },
-        { title: "Start fresh", desc: "New identity for a new chapter" },
-      ],
-    },
-    uvp2: {
-      label: "Your current logo — what should the new site do with it?",
-      key: "legacy_logo",
-      options: [
-        { title: "Use it prominently — it's recognizable", desc: "Front and center, hero placement" },
-        { title: "Standard nav placement", desc: "Top left, professional, consistent with norms" },
-        { title: "Refresh the logo, keep the spirit", desc: "Modernize without losing recognition" },
-        { title: "New logo entirely", desc: "A clean break with the past" },
-      ],
-    },
-    mc2: {
-      label: "How would you describe the goal of the redesign?",
-      key: "legacy_goal",
-      options: [
-        "Polish what we have",
-        "Same brand, better experience",
-        "Modernize without losing recognition",
-        "Signal a new era for the organization",
-        "Complete fresh start",
-      ],
-    },
-  },
-  complete: {
-    mc: {
-      label: "Which pages belong beyond the homepage — as extras, not essentials? (pick all that apply)",
-      key: "complete_extra",
-      multi: true,
-      options: [
-        "Video library",
-        "Event calendar",
-        "Photo gallery",
-        "Gala and fundraiser recaps",
-        "Annual reports",
-        "Board meeting minutes",
-        "Staff directory",
-        "Press coverage",
-        "Newsletter archive",
-      ],
-    },
-    rank: {
-      label: "Rank the sections of the homepage in the order a visitor should encounter them (drag to reorder)",
-      key: "complete_order",
-      items: [
-        "Hero — mission and call to action",
-        "Who we serve",
-        "Our services",
-        "Our impact",
-        "Client story",
-        "Funders and partners",
-        "Donate",
-        "Contact and location",
-      ],
-    },
-    uvp: {
-      label: "What's the right relationship between the homepage and the extra pages?",
-      key: "complete_relationship",
-      options: [
-        { title: "Homepage is the whole story", desc: "Extra pages are a bonus — never required" },
-        { title: "Homepage is the front door", desc: "Other pages complete the picture" },
-        { title: "All pages share equal weight", desc: "Visitors explore freely in any order" },
-        { title: "Different pages for different audiences", desc: "Clients, donors, and board get separate paths" },
+        "Roomy and calm",
+        "Balanced",
+        "Dense and detailed",
+        "Highly visual",
       ],
     },
   },
@@ -368,7 +186,7 @@ const PRINCIPLE_QUESTIONS = {
 
 /* ============================================================
    SHARED SURVEY PRIMITIVES
-   Reusable question components used across all 12 principle steps.
+   Reusable question components used across all 8 principle steps.
    ============================================================ */
 
 /* Multiple-choice rows — single or multi select */
@@ -600,7 +418,7 @@ function PrincipleStep({ principleId, data, set, note, headerNum }) {
 
 /* ============================================================
    DESIGN PRINCIPLES INTRO STEP
-   Shown before the 12-principle survey begins.
+   Shown before the 8-principle survey begins.
    ============================================================ */
 function DesignPrinciplesIntroStep() {
   return (
@@ -608,36 +426,42 @@ function DesignPrinciplesIntroStep() {
       <StepHeader
         num="08"
         label="Design Principles"
-        title={<>Twelve things to know about <em>good web design.</em></>}
+        title={<>8 Principles for <em>Your Site.</em></>}
       />
-      <div className="step-body">
-        <div className="exercise">
-          <p>Answer the design questions before choosing colors, layouts, or page structure.</p>
-
-          <h3>The twelve principles</h3>
-          <div className="principles-index">
-            {DESIGN_PRINCIPLES.map(p => (
-              <div className="principle-index-item" key={p.id}>
-                <span className="principle-index-num">{p.num.replace("P", "")}</span>
-                <div>
-                  <strong>{p.label}</strong>
-                  <span className="principle-index-title"> — {p.title}</span>
-                </div>
-              </div>
-            ))}
-          </div>
+      <div className="design-principles-layout">
+        <div className="note golden-rule">
+          <span className="tag">Golden rule</span>
+          <p>People scan first, decide emotionally, validate rationally, and act only when friction is low. These principles are about how people actually consume websites.</p>
+          <p>Can someone understand it in 5 seconds, trust it in 15 seconds, and act in 30 seconds? If not, simplify.</p>
         </div>
 
-        <aside className="notes-col">
+        <h3>The 8 principles</h3>
+        <div className="principles-index">
+          {[DESIGN_PRINCIPLES.slice(0, 5), DESIGN_PRINCIPLES.slice(5)].map((principles, columnIndex) => (
+            <div className="principle-index-col" key={columnIndex}>
+              {principles.map(p => (
+                <div className="principle-index-item" key={p.id}>
+                  <span className="principle-index-num">{p.num.replace("P", "")}</span>
+                  <div>
+                    <strong>{p.label}</strong>
+                    <span className="principle-index-title"> — {p.title}</span>
+                  </div>
+                </div>
+              ))}
+              </div>
+          ))}
+        </div>
+
+        <div className="design-note-wide">
           <DesignNote
-            title={<>These principles are calibrated against the <em>WRIC prototype.</em></>}
-            cite="Open it side-by-side"
+            title={<>These principles point toward the <em>new website.</em></>}
+            cite="Design direction"
             hero={true}
           >
-            <p>Every principle points to a decision already made in the live prototype at the link above.</p>
-            <p>Your job is not to critique the prototype — it's to confirm, refine, or redirect it.</p>
+            <p>Each principle helps translate staff and board input into practical website decisions.</p>
+            <p>Your job is to confirm, refine, or redirect the direction before design work gets locked in.</p>
           </DesignNote>
-        </aside>
+        </div>
       </div>
     </section>
   );
@@ -645,9 +469,9 @@ function DesignPrinciplesIntroStep() {
 
 /* ============================================================
    DESIGN PRINCIPLES REVIEW STEP
-   Summarizes all 12 principle responses.
+   Summarizes all 8 principle responses.
    ============================================================ */
-function DesignPrinciplesReviewStep({ data }) {
+function DesignPrinciplesReviewStep({ data, headerNum = "✦", showActions = true }) {
   const get = (k) => {
     const v = data[k];
     if (Array.isArray(v)) return v.join(", ") || "— not answered —";
@@ -656,34 +480,19 @@ function DesignPrinciplesReviewStep({ data }) {
   };
 
   const summaries = [
-    { label: "First impression feeling", key: "focus_feeling" },
-    { label: "Best headline choice", key: "clarity_headline" },
-    { label: "Clicks to find help", key: "clarity_clicks" },
+    { label: "First thing visitors should notice", key: "attention_first" },
+    { label: "First major section goal", key: "onegoal_section" },
+    { label: "Primary device expectation", key: "mobile_device" },
+    { label: "Where to reduce choices", key: "decisions_reduce" },
+    { label: "Best scanner-friendly pattern", key: "scanners_pattern" },
     { label: "Top trust signals", key: "trust_signals" },
-    { label: "Trust signal ranking", key: "trust_rank" },
-    { label: "Primary device for clients", key: "mobile_device" },
-    { label: "Mobile priority score", key: "mobile_importance" },
-    { label: "Reaction to one-page design", key: "onepage_reaction" },
-    { label: "Sections on the one-pager", key: "onepage_sections" },
-    { label: "Primary call to action", key: "action_cta" },
-    { label: "Audience priority ranking", key: "audience_rank" },
-    { label: "Ideal design style", key: "simplicity_style" },
-    { label: "Brand tone", key: "brand_tone" },
-    { label: "Number of brand colors", key: "brand_colors" },
-    { label: "Brand element ranking", key: "brand_rank" },
-    { label: "Most compelling impact format", key: "impact_statement" },
-    { label: "Blue and white brand decision", key: "legacy_colors" },
-    { label: "Logo decision", key: "legacy_logo" },
-    { label: "Redesign goal", key: "legacy_goal" },
-    { label: "Pages beyond the homepage", key: "complete_extra" },
-    { label: "Homepage section order", key: "complete_order" },
-    { label: "Homepage vs extra pages relationship", key: "complete_relationship" },
+    { label: "Preferred use of space", key: "whitespace_style" },
   ];
 
   return (
     <section className="step">
       <StepHeader
-        num="✦"
+        num={headerNum}
         label="Design Brief"
         title={<>What the group has <em>agreed on.</em></>}
       />
@@ -700,11 +509,13 @@ function DesignPrinciplesReviewStep({ data }) {
           ))}
         </div>
 
-        <div className="export-row">
-          <button type="button" className="btn btn-primary" onClick={() => window.print()}>
-            Print / Save as PDF
-          </button>
-        </div>
+        {showActions && (
+          <div className="export-row">
+            <button type="button" className="btn btn-primary" onClick={() => window.print()}>
+              Print / Save as PDF
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -714,65 +525,45 @@ function DesignPrinciplesReviewStep({ data }) {
    DESIGN NOTES — per principle, used inside PrincipleStep
    ============================================================ */
 const PRINCIPLE_NOTES = {
-  focus: {
-    title: <>Why the prototype should open with <em>one thing.</em></>,
-    cite: "Hero section",
-    body: <p>The WRIC prototype leads with mission, then immediately routes to services. There is no news ticker, no event list, no announcements. One job: connect a woman who needs our services.</p>,
+  attention: {
+    title: <>Design for the <em>first glance.</em></>,
+    cite: "Attention",
+    body: <p>Strong hierarchy, imagery, scale, and contrast should tell the story before anyone reads a sentence.</p>,
   },
-  clarity: {
-    title: <>Why a section says <em>"All in One Place."</em></>,
-    cite: "Hero + services grid",
-    body: <p>The prototype should open with a tagline and a one-line audience promise. If it sounds like a mission statement, make it plainer. Plain language is not dumbing down — it's clearing it up.</p>,
-  },
-  trust: {
-    title: <>Why the phone number sits in the hero — <em>twice.</em></>,
-    cite: "Hero call-bar · English + Spanish",
-    body: <p>The WRIC hero leads with English and Spanish phone numbers, plus staffed hours. For someone in crisis, that may be the whole reason they came. Credibility starts before the scroll.</p>,
+  onegoal: {
+    title: <>Give each section <em>one job.</em></>,
+    cite: "Focus",
+    body: <p>If a section has competing messages, visitors have to decide what matters. Many will choose none.</p>,
   },
   mobile: {
-    title: <>The prototype is built <em>phone-first.</em></>,
-    cite: "Responsive layout",
-    body: <p>Every layout decision in the prototype was tested on a 375px screen first. Tap targets are large. The phone number is a live link. Text is legible at arm's length.No .PDFs and long signup forms.</p>,
+    title: <>The new website should be built <em>phone-first.</em></>,
+    cite: "Mobile",
+    body: <p>Smaller screens force clarity. Tap targets, phone links, short forms, and readable text matter more than decorative complexity.</p>,
   },
-  onepage: {
-    title: <>The prototype <em>is</em> a one-pager (with footnotes).</>,
-    cite: "Anchor nav · single-scroll layout",
-    body: <p>The prototype runs as one long page: hero, services, pathways, history, people, support, and contact. It is easier to maintain and harder to neglect. Secondary pages (videos, gallaries and calander) exist to augment the homepage, not replace it.</p>,
+  show: {
+    title: <>Show before asking people to <em>read.</em></>,
+    cite: "Visual communication",
+    body: <p>Images, examples, icons, outcomes, and layout can help people understand the page before they commit to reading it.</p>,
   },
-  action: {
-    title: <>Why the prototype keeps saying <em>"Get started with us."</em></>,
-    cite: "Hero CTA · service cards · contact",
-    body: <p>The prototype repeats <em>Get started with us</em> in the hero, service cards, pathway block, and contact section. That repetition is the point: every section routes a new client toward intake.</p>,
+  decisions: {
+    title: <>Reduce the work required to <em>act.</em></>,
+    cite: "Friction",
+    body: <p>Every extra menu item, button, field, or unclear label creates another decision. Fewer decisions usually means more action.</p>,
   },
-  audience: {
-    title: <>The <em>"Take the first step"</em> module is the structural answer.</>,
-    cite: "Get started · three-path block",
-    body: <><p>New clients get intake. People still learning get orientation. Existing clients get a portal.</p><p>Each audience gets a door without crowding the others.</p></>,
+  scanners: {
+    title: <>Design for people who <em>skim.</em></>,
+    cite: "Scanning",
+    body: <p>Short headlines, clear sections, and visual anchors help visitors understand the page even when they do not read every word.</p>,
   },
-  simplicity: {
-    title: <>Why the prototype uses <em>generous spacing.</em></>,
-    cite: "Section rhythm",
-    body: <p>Each section of the prototype breathes. Content is never wall-to-wall. White space is not emptiness — it is editorial judgment about what matters enough to stand alone.</p>,
+  trust: {
+    title: <>Trust is built before the details.</>,
+    cite: "Credibility",
+    body: <p>People judge credibility quickly. Consistent visuals, real proof, clear language, and visible people help the website feel trustworthy.</p>,
   },
-  brand: {
-    title: <>The prototype uses <em>two colors and two fonts.</em></>,
-    cite: "Global stylesheet",
-    body: <p>Navy and white carry the brand. Those colors are iconic for WRIC A warm coral accent marks calls to action. One serif for headlines, one sans-serif for body. Consistency is credibility. Images add color.</p>,
-  },
-  impact: {
-    title: <>Why the prototype leads with <em>numbers and a story.</em></>,
-    cite: "Impact block",
-    body: <p>The prototype shows client counts, case outcomes, and a short anonymized testimonial side by side. Numbers build donor trust. Stories build human connection. Both belong on the page.</p>,
-  },
-  legacy: {
-    title: <>The prototype kept <em>blue and white</em> on purpose.</>,
-    cite: "Color palette · logo placement",
-    body: <><p>Funders and major donors associate your brand colors with credibility and stability. Changing them can create doubt — even if the new colors are objectively better.</p><p>The prototype modernizes the palette without abandoning it.</p></>,
-  },
-  complete: {
-    title: <>The contact section doesn't bury <em>"Need help right now?"</em></>,
-    cite: "Contact · emergency block",
-    body: <><p>The homepage answers every essential question: who you are, what you do, who you serve, how to get help, how to give, and how to reach you.</p><p>Secondary pages add the gala photos, the video library, and the event calendar — for people who are already engaged, not for people who are still deciding.</p></>,
+  whitespace: {
+    title: <>Use <em>generous spacing</em> to make choices clearer.</>,
+    cite: "White space",
+    body: <p>Each section should have room to breathe. White space is not emptiness; it is a way to show what matters enough to stand alone.</p>,
   },
 };
 
@@ -850,8 +641,8 @@ function CoverStep({ onStart, data, set }) {
               <span className="v">A printable brief</span>
             </div>
             <div className="item">
-              <span className="k">{t.deadline ? "Due by" : "Calibrated to"}</span>
-              <span className="v">{t.deadline || "A live prototype"}</span>
+              <span className="k">{t.deadline ? "Due by" : "Guided by"}</span>
+              <span className="v">{t.deadline || "A new website brief"}</span>
             </div>
           </div>
 
@@ -860,8 +651,8 @@ function CoverStep({ onStart, data, set }) {
              Start here →
             </button>
             {t.showDesignNotes && (
-              <a href={PROTOTYPE_URL} target="_blank" rel="noopener noreferrer" className="btn btn-link">
-                Open the prototype in a new tab ↗
+              <a href={EXAMPLE_SITE_URL} target="_blank" rel="noopener noreferrer" className="btn btn-link">
+                Open the example site in a new tab ↗
               </a>
             )}
           </div>
@@ -869,7 +660,7 @@ function CoverStep({ onStart, data, set }) {
 
         <div className="cover-art">
           <img src="./assets/hero-women.jpeg" alt="Watercolor portraits of women in profile, layered in shades of blue and teal." />
-          <span className="credit">Prototype hero · WRIC</span>
+          <span className="credit">Example site hero · WRIC</span>
         </div>
       </div>
     </section>
@@ -882,25 +673,18 @@ function PremiseStep() {
     <section className="step">
       <StepHeader
         num="01" label="Premise"
-        title={<>A website is a <em>fundraising engine</em>, not a bulletin board.</>}
+        title={<>Your website can showcase your mission, raise funds, and become a <em>valuable client resource.</em></>}
       />
-      <div className="step-body">
-        <div className="exercise">
-          <p>Before choosing a design, agree on what the website needs to accomplish. It should help donors give, help clients seek services, and help the wider community understand the mission.</p>
-
-          <h3>What this workbook does</h3>
-          <p>This workbook turns those decisions into a simple brief, so the website can work alongside social media, email, brochures, and advertising instead of trying to replace them.</p>
-        </div>
-
-        <aside className="notes-col">
+      <div className="full-width-note">
           <DesignNote
-            title={<>This workbook is calibrated against a <em>real site</em>.</>}
-            cite="Open it side-by-side"
+            title={<>How to use this <em>workbook.</em></>}
+            cite="Website brief"
             hero={true}
           >
-            <p>The notes point to decisions from the Women's Rights Information Center prototype.</p>
+            <p>This workbook helps staff and board members turn individual judgment into a shared website brief. Work through the questions in order, choose the answers that feel closest, and do not worry about perfect wording.</p>
+            <p>Before choosing a design, agree on what the website needs to accomplish. It should help donors give, help clients seek services, and help the wider community understand your mission.</p>
+            <p>This workbook turns those decisions into a simple brief, so the website can work alongside social media, email, brochures, and advertising instead of doing all the work alone.</p>
           </DesignNote>
-        </aside>
       </div>
     </section>
   );
@@ -1047,12 +831,12 @@ function PathwaysStep({ data, set, toggle }) {
       />
       <div className="step-body">
         <div className="exercise">
-          <h3>1 · Where do potential clients hear about us?</h3>
+          <h3>1 · How do potential clients hear about us?</h3>
           <p>Tick the channels that bring people to your services now.</p>
           <CheckList items={DISCOVERY_CHANNELS} selected={data.discovery || []} onToggle={v => toggle("discovery", v)} />
 
           <h3>2 · The first ten seconds</h3>
-          <p>When viewing our website on a phone, what should be visible right away?</p>
+          <p>What should we see first on the website?</p>
           <CheckList items={FIRST_TEN_SECONDS} selected={data.first_ten || []} onToggle={v => toggle("first_ten", v)} />
 
           <h3>3 · Three pathways, one homepage</h3>
@@ -1060,7 +844,7 @@ function PathwaysStep({ data, set, toggle }) {
           <div className="paths">
             <div className="path">
               <span className="num">01 · New client</span>
-              <span className="who">Someone arriving <em>for the first time</em></span>
+              <span className="who">Someone visiting the website <em>for the first time</em></span>
               <span className="what">What should they be able to do?</span>
               <PathwayChoiceList
                 name="path_new_action"
@@ -1150,12 +934,14 @@ function ScopeStep({ data, set, toggle }) {
               <span className="tag">Where you land</span>
               {onePagerLeans
                 ? "Strong signal: a single-page site is likely the right call."
-                : "You may need more than one page. Add pages only when someone owns them."}
+                : "A few extra pages may make sense, but each one needs a clear purpose and someone responsible for keeping it current-if not it just becomes cluttered, design starts to drift, and the site becomes harder to maintain and navigate."}
             </div>
           )}
 
-          <h3>If you go one-page, it has only what matters</h3>
+          <h3>If you go one-page, it's easier to navigate and more cost effective to maintain.</h3>
+          <p>Tick every statement that is honestly true about your website today.</p>
           <CheckList items={ONEPAGER_CHECKS} selected={data.onepager_checks || []} onToggle={v => toggle("onepager_checks", v)} single />
+         
         </div>
 
         <aside className="notes-col">
@@ -1164,7 +950,7 @@ function ScopeStep({ data, set, toggle }) {
             cite="Scope strategy"
           >
             <p>A smaller site can still feel complete when the most important information is organized clearly.</p>
-            <p>Add extra pages only when they have a real audience and someone responsible for keeping them current.</p>
+            <p>Add extra pages only when they have a real audience and someone responsible for keeping them current. </p> <p>Websites are like closets-they need to be tidy and organized to be useful. Once a season you need to clean them out. Once every few years you need to throw everything out and start over.</p>
           </DesignNote>
         </aside>
       </div>
@@ -1185,6 +971,7 @@ function PeopleStep({ data, toggle }) {
           <p>Donors, clients, and funders all look for credibility and trust. Use clear, current staff and board information to show who is behind the work.</p>
 
           <h3>The staff page — done right</h3>
+          <p>Tick every statement that makes sense for the site.</p>
           <CheckList items={STAFF_CHECKS} selected={data.staff_checks || []} onToggle={v => toggle("staff_checks", v)} single />
 
           <h3>The board page — done current</h3>
@@ -1216,26 +1003,10 @@ function ShowStep({ data, set, toggle }) {
       />
       <div className="step-body">
         <div className="exercise">
-          <p>Before writing copy, decide what the site needs to show. What does your UVP look like in real life?</p>
+          <p>Before writing copy, decide what the site needs to show. What does your Unique Value Proposition look like in real life?</p>
 
           <h3>Shot list — what we need to see</h3>
           <CheckList items={SHOT_LIST} selected={data.shots || []} onToggle={v => toggle("shots", v)} single />
-
-          <Field
-            label="Who is taking the photos, and by when?"
-            value={data.shot_owner}
-            onChange={v => set("shot_owner", v)}
-            placeholder="e.g. Marisol — first round of photos by Aug 15"
-            multiline={false}
-          />
-
-          <Field
-            label="The three images we MUST get right (describe them)"
-            value={data.must_shots}
-            onChange={v => set("must_shots", v)}
-            placeholder={"1. The Tuesday meal at the community center — wide, warm, faces visible.\n2. A staff member with a client — mid-conversation, not posed.\n3. …"}
-            rows={5}
-          />
         </div>
 
         <aside className="notes-col">
@@ -1254,7 +1025,7 @@ function ShowStep({ data, set, toggle }) {
 
 /* ---------- Review ---------- */
 function ReviewStep({ data, reset }) {
-  const t = useTweakValues();
+  const [responseCount, setResponseCount] = React.useState(null);
   const get = (k) => (data[k] || "").trim();
   const getList = (k) => data[k] || [];
   const goalRank = Array.isArray(data.primary_goal_rank) ? data.primary_goal_rank : [];
@@ -1262,9 +1033,19 @@ function ReviewStep({ data, reset }) {
     .map(id => PRIMARY_GOALS.find(g => g.id === id))
     .filter(Boolean);
   const primary = rankedGoals[0] || PRIMARY_GOALS.find(g => g.id === data.primary_goal);
-  const name = get("respondent_name");
-  const role = get("respondent_role");
-  const initials = name ? name.split(/\s+/).map(s => s[0]).join("").slice(0, 2).toUpperCase() : "";
+
+  React.useEffect(() => {
+    let mounted = true;
+    if (!window.WorkbookFirebase || !window.WorkbookFirebase.getPublicSummaries) return () => { mounted = false; };
+    window.WorkbookFirebase.getPublicSummaries()
+      .then((summaries) => {
+        if (mounted) setResponseCount(summaries.length);
+      })
+      .catch(() => {
+        if (mounted) setResponseCount(null);
+      });
+    return () => { mounted = false; };
+  }, []);
 
   const QA = ({ q, a, empty = "— not yet answered —" }) => (
     <div className="review-q">
@@ -1281,12 +1062,9 @@ function ReviewStep({ data, reset }) {
       />
 
       <div style={{ maxWidth: "var(--max-w)", margin: "0 auto" }}>
-        {t.mode === "solo" && name && (
-          <div className="respondent-badge">
-            <span className="avatar">{initials || "?"}</span>
-            <span>Response from <strong>{name}</strong>{role ? <>, {role}</> : null}</span>
-          </div>
-        )}
+        <div className="respondent-badge">
+          <span>{responseCount === null ? "Responses are being collected." : `${responseCount} response${responseCount === 1 ? "" : "s"} received so far.`}</span>
+        </div>
 
         <div className="review-section">
           <h4>Unique Value Proposition</h4>
@@ -1327,13 +1105,11 @@ function ReviewStep({ data, reset }) {
         <div className="review-section">
           <h4>Show, don't tell — shot list</h4>
           <QA q="Shots we'll capture" a={getList("shots").map(s => "• " + s).join("\n")} empty="— none —" />
-          <QA q="Owner and deadline" a={get("shot_owner")} empty="— not assigned —" />
-          <QA q="The three images we must get right" a={get("must_shots")} empty="— not yet defined —" />
         </div>
 
         <div className="review-section">
           <h4>Design principles — group consensus</h4>
-          <DesignPrinciplesReviewStep data={data} />
+          <DesignPrinciplesReviewStep data={data} showActions={false} />
         </div>
 
         <div className="export-row">
@@ -1362,16 +1138,74 @@ function ReviewStep({ data, reset }) {
 
 /* ---------- Close ---------- */
 const RESULT_FIELDS = [
-  { key: "primary_goal", label: "Primary website job" },
-  { key: "uvp_problem", label: "Core problem" },
-  { key: "uvp_approach", label: "Most effective approach" },
-  { key: "path_new_action", label: "New client path" },
-  { key: "path_donor_action", label: "Potential donor path" },
-  { key: "path_existing_action", label: "Existing client path" },
-  { key: "action_cta", label: "Primary call to action" },
-  { key: "legacy_goal", label: "Redesign goal" },
-  { key: "complete_relationship", label: "Homepage relationship" },
+  { key: "primary_goal", label: "Top-ranked website job" },
+  { key: "uvp_problem", label: "Why Clients Come to Us" },
+  { key: "uvp_approach", label: "What makes our approach effective" },
+  { key: "path_new_action", label: "What new clients should be able to do" },
+  { key: "path_donor_action", label: "What potential donors need" },
+  { key: "path_existing_action", label: "What existing clients need" },
+  { key: "attention_first", label: "What visitors should notice first" },
+  { key: "decisions_reduce", label: "Where the website can reduce choices" },
 ];
+
+function normalizeSummaryAnswers(summary) {
+  const answers = { ...((summary && summary.answers) || {}) };
+  if (summary && summary.respondentRole && !answers.respondent_role) {
+    answers.respondent_role = summary.respondentRole;
+  }
+  return answers;
+}
+
+function percent(count, total) {
+  if (!total) return 0;
+  return Math.round((count / total) * 100);
+}
+
+function tallyValues(summaries, field) {
+  const counts = {};
+  let answered = 0;
+
+  summaries.forEach((summary) => {
+    const answers = normalizeSummaryAnswers(summary);
+    const raw = answers[field.key];
+    const values = Array.isArray(raw) ? raw : (raw ? [raw] : []);
+    if (values.length) answered += 1;
+    values.forEach((value) => {
+      counts[value] = (counts[value] || 0) + 1;
+    });
+  });
+
+  return {
+    answered,
+    results: Object.keys(counts)
+      .map((value) => ({ value, count: counts[value], pct: percent(counts[value], summaries.length) }))
+      .sort((a, b) => b.count - a.count || a.value.localeCompare(b.value)),
+  };
+}
+
+function tallyRankings(summaries, field) {
+  const scores = {};
+  const firstPlace = {};
+  let answered = 0;
+
+  summaries.forEach((summary) => {
+    const answers = normalizeSummaryAnswers(summary);
+    const ranking = Array.isArray(answers[field.key]) ? answers[field.key] : [];
+    if (!ranking.length) return;
+    answered += 1;
+    ranking.forEach((value, index) => {
+      scores[value] = (scores[value] || 0) + (ranking.length - index);
+      if (index === 0) firstPlace[value] = (firstPlace[value] || 0) + 1;
+    });
+  });
+
+  return {
+    answered,
+    results: Object.keys(scores)
+      .map((value) => ({ value, score: scores[value], first: firstPlace[value] || 0 }))
+      .sort((a, b) => b.score - a.score || b.first - a.first || a.value.localeCompare(b.value)),
+  };
+}
 
 function ResultsSnapshot() {
   const [state, setState] = React.useState({
@@ -1391,9 +1225,10 @@ function ResultsSnapshot() {
       .then((summaries) => {
         if (mounted) setState({ error: "", loading: false, summaries });
       })
-      .catch(() => {
+      .catch((error) => {
         if (mounted) {
-          setState({ error: "Results are not available yet. Check Firebase Auth and database rules.", loading: false, summaries: [] });
+          const message = error && (error.code || error.message) ? ` (${error.code || error.message})` : "";
+          setState({ error: `Results are not available yet${message}. Check Firebase Anonymous Auth and Realtime Database rules.`, loading: false, summaries: [] });
         }
       });
 
@@ -1484,10 +1319,10 @@ function CloseStep({ data }) {
 
         <aside className="notes-col">
           <DesignNote
-            title={<>Why the prototype site is <em>short</em>.</>}
+            title={<>Why the new website can stay <em>focused</em>.</>}
             cite="The whole site"
           >
-            <p>The prototype leaves out archives, PDF dumps, and stale press pages.</p>
+            <p>A focused site leaves out archives, PDF dumps, and stale press pages.</p>
             <p>Content that belongs elsewhere is routed elsewhere.</p>
           </DesignNote>
         </aside>
@@ -1585,7 +1420,7 @@ function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const wb = useWorkbook();
 
-  /* Build the full step list including the 12 design principle steps */
+  /* Build the full step list including the 10 design principle steps */
   const ALL_STEPS = React.useMemo(() => {
     const principleSteps = DESIGN_PRINCIPLES.map((p, i) => ({
       id: `principle_${p.id}`,
@@ -1599,7 +1434,7 @@ function App() {
       ...STEPS.slice(0, STEPS.findIndex(s => s.kind === "review")),
       { id: "design_intro", label: "Design", kind: "design_intro", num: "08" },
       ...principleSteps,
-      { id: "design_brief", label: "Design Brief", kind: "design_brief", num: "21" },
+      { id: "design_brief", label: "Design Brief", kind: "design_brief", num: "17" },
       ...STEPS.slice(STEPS.findIndex(s => s.kind === "review")),
     ];
   }, []);
@@ -1644,13 +1479,28 @@ function App() {
   const step = activeSteps[idx] || activeSteps[0];
   const onNext = () => setIdx(i => Math.min(activeSteps.length - 1, i + 1));
   const onPrev = () => setIdx(i => Math.max(0, i - 1));
+  const onDone = () => {
+    if (!window.WorkbookFirebase || Object.keys(wb.data).length === 0) {
+      alert("Your response is saved locally in this browser.");
+      return;
+    }
+
+    window.WorkbookFirebase.save(wb.data)
+      .then(() => {
+        alert("Your response has been saved.");
+      })
+      .catch((error) => {
+        const message = error && (error.code || error.message) ? `\n\n${error.code || error.message}` : "";
+        alert(`We could not save to Firebase. Your response is still saved locally in this browser.${message}`);
+      });
+  };
 
   const renderStep = () => {
     if (step.kind === "cover")        return <CoverStep onStart={onNext} data={wb.data} set={wb.set} />;
     if (step.kind === "review")       return <ReviewStep data={wb.data} reset={wb.reset} />;
     if (step.kind === "close")        return <CloseStep data={wb.data} />;
     if (step.kind === "design_intro") return <DesignPrinciplesIntroStep />;
-    if (step.kind === "design_brief") return <DesignPrinciplesReviewStep data={wb.data} />;
+    if (step.kind === "design_brief") return <DesignPrinciplesReviewStep data={wb.data} headerNum={step.num} />;
     if (step.kind === "principle") {
       return (
         <PrincipleStep
@@ -1685,7 +1535,7 @@ function App() {
         <TopBar />
         <Stepper idx={idx} onJump={(i) => setIdx(i)} steps={activeSteps} />
         <main className="main">{renderStep()}</main>
-        <FootNav idx={idx} total={activeSteps.length} steps={activeSteps} onPrev={onPrev} onNext={onNext} />
+        <FootNav idx={idx} total={activeSteps.length} steps={activeSteps} onPrev={onPrev} onNext={onNext} onDone={onDone} />
         <WorkbookTweaks t={t} setTweak={setTweak} />
       </div>
     </TweakCtx.Provider>

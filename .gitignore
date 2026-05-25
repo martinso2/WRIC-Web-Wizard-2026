@@ -1,6 +1,8 @@
 node_modules/
 dist/
+.npm-cache/
 .DS_Store
+firebase-debug.log
 *-firebase-adminsdk-*.json
 serviceAccountKey.json
 *-rtdb-export.json

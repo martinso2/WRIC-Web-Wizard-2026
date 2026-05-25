@@ -1,8 +1,8 @@
 # Nonprofit Website Workbook
 
-A horizontal, responsive wizard that walks a nonprofit board or working group through seven exercises that produce a **website brief** — *before* a single design decision is made. Each step pairs an exercise with a "From the prototype" callout that explains the design rationale by pointing at a real working site:
+A horizontal, responsive wizard that walks a nonprofit board or working group through exercises that produce a **website brief** before design decisions are made. Each step pairs an exercise with design notes that explain how the answers inform the new website:
 
-> **Prototype:** [Women's Rights Information Center](https://womens-rights-information-center.vercel.app/) (Englewood, NJ)
+> **Example site:** [Women's Rights Information Center](https://womens-rights-information-center.vercel.app/) (Englewood, NJ)
 
 ---
 
@@ -10,8 +10,7 @@ A horizontal, responsive wizard that walks a nonprofit board or working group th
 
 ```
 .
-├── Nonprofit Website Workbook.html   # Entry point (open in any browser)
-├── index.html                        # Dev/deploy entry point
+├── index.html                        # App entry point
 ├── package.json                      # Local dev/build scripts
 ├── vercel.json                       # Vercel static output config
 ├── styles.css                        # All styles — WRIC-aligned tokens
@@ -20,12 +19,10 @@ A horizontal, responsive wizard that walks a nonprofit board or working group th
 ├── src/
 │   ├── data.jsx                      # All content (questions, options, copy)
 │   ├── wizard.jsx                    # Shell: TopBar, Stepper, FootNav, primitives
+│   ├── firebase-sync.js              # Firebase Realtime Database sync
 │   └── steps.jsx                     # Per-step content + App + mount
 ├── assets/
-│   ├── wric-logo.png                 # WRIC building mark (1159×1387)
-│   ├── hero-women.jpeg               # Watercolor portraits hero (1456×816)
-│   └── wric-globals.css              # WRIC's own stylesheet (reference only)
-├── v1-paginated/                     # Earlier vertical/paginated draft
+│   └── hero-women.jpeg               # Watercolor portraits hero (1456×816)
 └── README.md                         # This file
 ```
 
@@ -65,14 +62,14 @@ The build writes to `dist/`, which is the output directory configured in `vercel
 
 ## Design system
 
-Everything lives in CSS custom properties at the top of `styles.css`. Tokens are calibrated to the WRIC prototype so the workbook reads as a sibling artifact, not a stranger.
+Everything lives in CSS custom properties at the top of `styles.css`. Tokens are calibrated to the WRIC example site so the workbook reads as a sibling artifact, not a stranger.
 
 ### Color tokens
 
 | Token | Value | Use |
 |---|---|---|
 | `--navy` | `#0a1d3a` | Primary brand, body ink, logo mark |
-| `--navy-bright` | `#0b3b7a` | Links, focus rings, "From the prototype" accents |
+| `--navy-bright` | `#0b3b7a` | Links, focus rings, design-note accents |
 | `--coral` | `#e8654a` | Primary CTAs, eyebrow accents |
 | `--coral-deep` | `#c94e35` | CTA hover |
 | `--paper` | `#faf7f2` | Page background — warm cream |
@@ -86,7 +83,7 @@ Everything lives in CSS custom properties at the top of `styles.css`. Tokens are
 
 - **Display serif:** `Cormorant Garamond` (400-700, italic) — section titles, prompts, drill numbers
 - **Sans:** `Geist` (400-700) — UI chrome, body, labels
-- Both loaded from Google Fonts in `Nonprofit Website Workbook.html`
+- Both loaded from Google Fonts in `index.html`
 
 ### Radius scale
 `--r-sm: 10px` · `--r-md: 14px` · `--r-lg: 20px` · `--r-xl: 28px`
@@ -110,8 +107,8 @@ Everything lives in CSS custom properties at the top of `styles.css`. Tokens are
 ├─────────────────────────────┬────────────────────────┤
 │  Exercise (left, 1.55fr)    │  Design notes (1fr)    │
 │  - Section sub-heads        │  ┌──────────────────┐  │
-│  - Prompts + textareas      │  │ From the         │  │
-│  - Checklists               │  │ prototype        │  │
+│  - Prompts + textareas      │  │ Design           │  │
+│  - Checklists               │  │ notes            │  │
 │  - Three-paths grid         │  │                  │  │
 │  - Pull quotes              │  │ Why the hero …   │  │
 │                              │  │ View on the site │  │
@@ -185,7 +182,7 @@ The review step also exports answers as JSON (`workbook-brief.json`) and support
 | `<Check checked onChange>{label}</Check>` | Single checkbox row |
 | `<CheckList items selected onToggle single />` | Two-column or single-column checklist |
 | `<PickGrid value onChange options />` | Radio-card grid for "pick one" choices |
-| `<DesignNote title cite hero>{children}</DesignNote>` | The "From the prototype" callout |
+| `<DesignNote title cite hero>{children}</DesignNote>` | The design-note callout |
 
 ---
 
@@ -240,8 +237,7 @@ workbook/
 │   ├── useWorkbook.ts             # State + localStorage hook
 │   └── types.ts                   # WorkbookData type
 └── public/
-    ├── hero-women.jpeg
-    └── wric-logo.png
+    └── hero-women.jpeg
 ```
 
 ---
@@ -250,7 +246,7 @@ workbook/
 
 - **Don't invent new colors.** Every accent should come from the `:root` token block.
 - **Display copy uses Cormorant Garamond italic** for emphasis (the `<em>` inside `<h1>`, `.step-title`, `.field-prompt`, `.drill .prompt`, `.design-note h4`). Keep that pattern.
-- **"From the prototype" boxes always link to the WRIC URL** and end with a `cite` line naming the section being referenced.
+- **Design notes should explain how answers inform the new website** and may link to the WRIC example site when useful.
 - **The exercise column is canonical**; the design-note column is supporting commentary. Don't put inputs in the right column.
 - **Mobile-first.** Check every change at 375px before celebrating.
 - **Touch targets ≥ 44px** (WRIC's globals.css uses 44/48/52 minimums — keep this).
@@ -264,7 +260,7 @@ workbook/
 - [ ] Add a "Resume from email" link — magic-link auth that re-hydrates `localStorage` from the server.
 - [ ] Build a "Designer view" of the review page that's optimized for handoff (one printable page, no inputs).
 - [ ] Optional: per-section facilitator notes the chair can toggle on for board meetings.
-- [ ] Optional: a comparison view that puts the answers side-by-side with the WRIC prototype, section by section.
+- [ ] Optional: a comparison view that puts the answers side-by-side with the WRIC example site, section by section.
 
 ---
 

@@ -6,8 +6,8 @@
 /* eslint-disable */
 
 const STORAGE_KEY = "nonprofit-workbook-v2";
-const PROTOTYPE_URL  = "https://womens-rights-information-center.vercel.app/";
-const PROTOTYPE_NAME = "Women's Rights Information Center";
+const EXAMPLE_SITE_URL  = "https://womens-rights-information-center.vercel.app/";
+const EXAMPLE_SITE_NAME = "Women's Rights Information Center";
 
 /* ─── Sender-configurable tweaks ────────────────────────────────────────
    The chair / sender opens the Tweaks panel to configure these BEFORE
@@ -40,9 +40,9 @@ const STEPS = [
 const UVP_DRILLS = [
   {
     id: "uvp_problem",
-    prompt: "What specific problem do we solve better than anyone else?",
+    prompt: "What primary challenge brings people to us?",
     options: [
-      "People need help but do not know where to start",
+      "People need help but aren't quite sure where to go",
       "People are overwhelmed by separate agencies, forms, and referrals",
       "Women need support from people who understand their specific challenges",
     ],
@@ -176,6 +176,7 @@ const ONEPAGER_CHECKS = [
   "A simple explanation of programs",
   "Who we serve and why it matters",
   "A clean, unmistakable Donate or Get Involved button",
+  "None of the above — we need all of these",
 ];
 
 const STAFF_CHECKS = [
@@ -198,7 +199,7 @@ const SHOT_LIST = [
   "The people we serve (with consent) — faces, hands, success stories",
   "The place — our space, our neighborhood, our table",
   "Outcomes, not infographics — what \"after\" looks like",
-  "Behind-the-scenes staff members doing the workno stock-photos",
+  "Behind-the-scenes staff members doing the work no stock-photos",
 ];
 
 const CHANNELS = [
@@ -216,7 +217,7 @@ const ESSENTIALS_STEP_IDS = ["cover", "premise", "uvp", "onejob", "pathways", "r
 
 /* Expose to other scripts (Babel script scopes don't share by default) */
 Object.assign(window, {
-  STORAGE_KEY, PROTOTYPE_URL, PROTOTYPE_NAME, TWEAK_DEFAULTS, ESSENTIALS_STEP_IDS,
+  STORAGE_KEY, EXAMPLE_SITE_URL, EXAMPLE_SITE_NAME, TWEAK_DEFAULTS, ESSENTIALS_STEP_IDS,
   STEPS, UVP_DRILLS, PRIMARY_GOALS, DISCOVERY_CHANNELS,
   FIRST_TEN_SECONDS, PATHWAY_NEW_CLIENT, PATHWAY_POTENTIAL_DONOR, PATHWAY_EXISTING_CLIENT,
   TRUST_SIGNALS, SCOPE_CHECKS, ONEPAGER_CHECKS,
