@@ -94,26 +94,26 @@ const PRINCIPLE_QUESTIONS = {
     },
   },
   onegoal: {
-    uvp: {
+    mc: {
       label: "What should the first major section do?",
       key: "onegoal_section",
       options: [
-        { title: "Explain who WRIC helps", desc: "Make the audience clear first" },
-        { title: "Route people to services", desc: "Move quickly toward action" },
-        { title: "Build donor confidence", desc: "Lead with credibility and impact" },
-        { title: "Introduce the organization", desc: "Give context before action" },
+        "Explain who WRIC helps",
+        "Route people to services",
+        "Build donor confidence",
+        "Introduce the organization",
       ],
     },
   },
   mobile: {
-    uvp: {
+    mc: {
       label: "Where are people most likely to first view the website?",
       key: "mobile_device",
       options: [
-        { title: "Phone", desc: "On the go, perhapsunder stress, limited time" },
-        { title: "Laptop or desktop", desc: "Office or home setting" },
-        { title: "Tablet", desc: "Shared device, library" },
-        { title: "Not sure", desc: "We haven't measured" },
+        "Phone",
+        "Laptop or desktop",
+        "Tablet",
+        "Not sure",
       ],
     },
   },
@@ -437,7 +437,7 @@ function DesignPrinciplesIntroStep() {
 
         <h3>The 8 principles</h3>
         <div className="principles-index">
-          {[DESIGN_PRINCIPLES.slice(0, 5), DESIGN_PRINCIPLES.slice(5)].map((principles, columnIndex) => (
+          {[DESIGN_PRINCIPLES.slice(0, 4), DESIGN_PRINCIPLES.slice(4)].map((principles, columnIndex) => (
             <div className="principle-index-col" key={columnIndex}>
               {principles.map(p => (
                 <div className="principle-index-item" key={p.id}>
@@ -823,6 +823,11 @@ function PathwayChoiceList({ name, items, value, onChange }) {
 }
 
 function PathwaysStep({ data, set, toggle }) {
+  const selectedValue = (key) => {
+    const value = data[key];
+    return Array.isArray(value) ? value[0] : value;
+  };
+
   return (
     <section className="step">
       <StepHeader
@@ -832,12 +837,22 @@ function PathwaysStep({ data, set, toggle }) {
       <div className="step-body">
         <div className="exercise">
           <h3>1 · How do potential clients hear about us?</h3>
-          <p>Tick the channels that bring people to your services now.</p>
-          <CheckList items={DISCOVERY_CHANNELS} selected={data.discovery || []} onToggle={v => toggle("discovery", v)} />
+          <p>Choose the one channel that brings the most people to your services now.</p>
+          <PathwayChoiceList
+            name="discovery"
+            items={DISCOVERY_CHANNELS}
+            value={selectedValue("discovery")}
+            onChange={v => set("discovery", v)}
+          />
 
           <h3>2 · The first ten seconds</h3>
           <p>What should we see first on the website?</p>
-          <CheckList items={FIRST_TEN_SECONDS} selected={data.first_ten || []} onToggle={v => toggle("first_ten", v)} />
+          <PathwayChoiceList
+            name="first_ten"
+            items={FIRST_TEN_SECONDS}
+            value={selectedValue("first_ten")}
+            onChange={v => set("first_ten", v)}
+          />
 
           <h3>3 · Three pathways, one homepage</h3>
           <p>Choose the actions each audience should be able to take.</p>
@@ -878,8 +893,13 @@ function PathwaysStep({ data, set, toggle }) {
           </div>
 
           <h3>4 · Trust signals</h3>
-          <p>Tick the signals visitors should not have to hunt for.</p>
-          <CheckList items={TRUST_SIGNALS} selected={data.trust || []} onToggle={v => toggle("trust", v)} />
+          <p>Choose the trust signal visitors should not have to hunt for.</p>
+          <PathwayChoiceList
+            name="trust"
+            items={TRUST_SIGNALS}
+            value={selectedValue("trust")}
+            onChange={v => set("trust", v)}
+          />
         </div>
 
         <aside className="notes-col">
@@ -1028,6 +1048,7 @@ function ReviewStep({ data, reset }) {
   const [responseCount, setResponseCount] = React.useState(null);
   const get = (k) => (data[k] || "").trim();
   const getList = (k) => data[k] || [];
+  const getChoice = (k) => Array.isArray(data[k]) ? (data[k][0] || "") : get(k);
   const goalRank = Array.isArray(data.primary_goal_rank) ? data.primary_goal_rank : [];
   const rankedGoals = goalRank
     .map(id => PRIMARY_GOALS.find(g => g.id === id))
@@ -1083,23 +1104,23 @@ function ReviewStep({ data, reset }) {
 
         <div className="review-section">
           <h4>Client pathways</h4>
-          <QA q="Where clients hear about us" a={getList("discovery").map(s => "• " + s).join("\n")} empty="— none —" />
-          <QA q="First ten seconds — what must be visible" a={getList("first_ten").map(s => "• " + s).join("\n")} empty="— none —" />
+          <QA q="Where clients hear about us" a={getChoice("discovery")} empty="— none —" />
+          <QA q="First ten seconds — what must be visible" a={getChoice("first_ten")} empty="— none —" />
           <QA q="Path for a new client" a={get("path_new_action")} empty="— none —" />
           <QA q="Path for a potential donor" a={get("path_donor_action")} empty="— none —" />
           <QA q="Path for an existing client" a={get("path_existing_action")} empty="— none —" />
-          <QA q="Trust signals we'll commit to" a={getList("trust").map(s => "• " + s).join("\n")} empty="— none —" />
+          <QA q="Trust signal we'll commit to" a={getChoice("trust")} empty="— none —" />
         </div>
 
         <div className="review-section">
           <h4>Scope</h4>
-          <QA q="One-pager signals checked" a={getList("scope_checks").map(s => "• " + s).join("\n")} empty="— none —" />
+          <QA q="Why a One Page Website may be best" a={getList("scope_checks").map(s => "• " + s).join("\n")} empty="— none —" />
         </div>
 
         <div className="review-section">
           <h4>People — staff & board commitments</h4>
-          <QA q="Staff page standards we'll hold" a={getList("staff_checks").map(s => "• " + s).join("\n")} empty="— none —" />
-          <QA q="Board page standards we'll hold" a={getList("board_checks").map(s => "• " + s).join("\n")} empty="— none —" />
+          <QA q="Staff Section design preferences" a={getList("staff_checks").map(s => "• " + s).join("\n")} empty="— none —" />
+          <QA q="Board Section design preferences" a={getList("board_checks").map(s => "• " + s).join("\n")} empty="— none —" />
         </div>
 
         <div className="review-section">
@@ -1139,13 +1160,35 @@ function ReviewStep({ data, reset }) {
 /* ---------- Close ---------- */
 const RESULT_FIELDS = [
   { key: "primary_goal", label: "Top-ranked website job" },
-  { key: "uvp_problem", label: "Why Clients Come to Us" },
-  { key: "uvp_approach", label: "What makes our approach effective" },
   { key: "path_new_action", label: "What new clients should be able to do" },
   { key: "path_donor_action", label: "What potential donors need" },
   { key: "path_existing_action", label: "What existing clients need" },
   { key: "attention_first", label: "What visitors should notice first" },
   { key: "decisions_reduce", label: "Where the website can reduce choices" },
+];
+
+const UVP_RESULT_FIELDS = [
+  { key: "uvp_problem", label: "Why Clients Come to Us" },
+  { key: "uvp_approach", label: "What makes our approach effective" },
+  { key: "uvp_proof", label: "Proof that lives are changing" },
+  { key: "uvp_loss", label: "Who would feel the loss" },
+  { key: "uvp_diff", label: "What makes WRIC different" },
+  { key: "uvp_feel", label: "What visitors should feel" },
+];
+
+const SCOPE_RESULT_FIELDS = [
+  { key: "scope_checks", label: "One-page site signals" },
+  { key: "onepager_checks", label: "What a one-page site would need" },
+];
+
+const PEOPLE_RESULT_FIELDS = [
+  { key: "staff_checks", label: "Staff page priorities" },
+  { key: "board_checks", label: "Board page priorities" },
+];
+
+const VISUAL_RESULT_FIELDS = [
+  { key: "show_first", label: "What to show before asking people to read" },
+  { key: "shots", label: "What the website needs to show" },
 ];
 
 function normalizeSummaryAnswers(summary) {
@@ -1251,9 +1294,24 @@ function ResultsSnapshot() {
         .slice(0, 3);
     };
 
-    return RESULT_FIELDS
+    const buildRows = (fields) => fields
       .map((field) => ({ ...field, results: countValues(field.key) }))
       .filter((field) => field.results.length > 0);
+
+    const onePageSignals = state.summaries.reduce((total, summary) => {
+      const answers = normalizeSummaryAnswers(summary);
+      const checked = Array.isArray(answers.scope_checks) ? answers.scope_checks : [];
+      return total + (checked.length >= 3 ? 1 : 0);
+    }, 0);
+
+    return {
+      onePageSignals,
+      peopleRows: buildRows(PEOPLE_RESULT_FIELDS),
+      rows: buildRows(RESULT_FIELDS),
+      scopeRows: buildRows(SCOPE_RESULT_FIELDS),
+      uvpRows: buildRows(UVP_RESULT_FIELDS),
+      visualRows: buildRows(VISUAL_RESULT_FIELDS),
+    };
   }, [state.summaries]);
 
   return (
@@ -1264,22 +1322,109 @@ function ResultsSnapshot() {
       {!state.loading && !state.error && (
         <>
           <p>{state.summaries.length} response{state.summaries.length === 1 ? "" : "s"} received.</p>
-          {rows.length === 0 ? (
+          {rows.rows.length === 0 && rows.uvpRows.length === 0 && rows.scopeRows.length === 0 && rows.peopleRows.length === 0 && rows.visualRows.length === 0 ? (
             <p>No aggregate results are available yet.</p>
           ) : (
-            <div className="results-grid">
-              {rows.map((row) => (
-                <div className="result-card" key={row.key}>
-                  <div className="result-label">{row.label}</div>
-                  {row.results.map((result) => (
-                    <div className="result-row" key={result.value}>
-                      <span>{result.value}</span>
-                      <strong>{result.count}</strong>
+            <>
+              {rows.uvpRows.length > 0 && (
+                <div className="result-group">
+                  <h4>Unique Value Proposition</h4>
+                  <div className="results-grid">
+                    {rows.uvpRows.map((row) => (
+                      <div className="result-card" key={row.key}>
+                        <div className="result-label">{row.label}</div>
+                        {row.results.map((result) => (
+                          <div className="result-row" key={result.value}>
+                            <span>{result.value}</span>
+                            <strong>{result.count}</strong>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {rows.scopeRows.length > 0 && (
+                <div className="result-group">
+                  <h4>One-page website direction</h4>
+                  <div className="result-card result-card-wide">
+                    <div className="result-label">One-page signal</div>
+                    <div className="result-row">
+                      <span>{rows.onePageSignals} of {state.summaries.length} responses selected three or more one-page signals.</span>
+                      <strong>{percent(rows.onePageSignals, state.summaries.length)}%</strong>
+                    </div>
+                  </div>
+                  <div className="results-grid">
+                    {rows.scopeRows.map((row) => (
+                      <div className="result-card" key={row.key}>
+                        <div className="result-label">{row.label}</div>
+                        {row.results.map((result) => (
+                          <div className="result-row" key={result.value}>
+                            <span>{result.value}</span>
+                            <strong>{result.count}</strong>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {rows.peopleRows.length > 0 && (
+                <div className="result-group">
+                  <h4>Staff and board pages</h4>
+                  <div className="results-grid">
+                    {rows.peopleRows.map((row) => (
+                      <div className="result-card" key={row.key}>
+                        <div className="result-label">{row.label}</div>
+                        {row.results.map((result) => (
+                          <div className="result-row" key={result.value}>
+                            <span>{result.value}</span>
+                            <strong>{result.count}</strong>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {rows.visualRows.length > 0 && (
+                <div className="result-group">
+                  <h4>Visual priorities</h4>
+                  <div className="results-grid">
+                    {rows.visualRows.map((row) => (
+                      <div className="result-card" key={row.key}>
+                        <div className="result-label">{row.label}</div>
+                        {row.results.map((result) => (
+                          <div className="result-row" key={result.value}>
+                            <span>{result.value}</span>
+                            <strong>{result.count}</strong>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {rows.rows.length > 0 && (
+                <div className="results-grid">
+                  {rows.rows.map((row) => (
+                    <div className="result-card" key={row.key}>
+                      <div className="result-label">{row.label}</div>
+                      {row.results.map((result) => (
+                        <div className="result-row" key={result.value}>
+                          <span>{result.value}</span>
+                          <strong>{result.count}</strong>
+                        </div>
+                      ))}
                     </div>
                   ))}
                 </div>
-              ))}
-            </div>
+              )}
+            </>
           )}
         </>
       )}
