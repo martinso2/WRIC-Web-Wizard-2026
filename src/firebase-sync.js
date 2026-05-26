@@ -87,6 +87,7 @@
       respondentEmail: answers.respondent_email || "",
       respondentName: answers.respondent_name || "",
       respondentRole: answers.respondent_role || "",
+      responseId,
       updatedAt,
       url: window.location.href,
       uid: user.uid,
@@ -95,6 +96,7 @@
     const publicRecord = {
       answers: sanitizeAnswers(answers),
       createdAt,
+      responseId,
       updatedAt,
     };
 

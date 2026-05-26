@@ -1,8 +1,6 @@
 # Nonprofit Website Workbook
 
-A horizontal, responsive wizard that walks a nonprofit board or working group through exercises that produce a **website brief** before design decisions are made. Each step pairs an exercise with design notes that explain how the answers inform the new website:
-
-> **Example site:** [Women's Rights Information Center](https://womens-rights-information-center.vercel.app/) (Englewood, NJ)
+A horizontal, responsive wizard that walks a nonprofit board or working group through exercises that produce a **website brief** before design decisions are made. Each step pairs an exercise with design notes that explain how the answers inform the new website.
 
 ---
 
@@ -13,7 +11,7 @@ A horizontal, responsive wizard that walks a nonprofit board or working group th
 ├── index.html                        # App entry point
 ├── package.json                      # Local dev/build scripts
 ├── vercel.json                       # Vercel static output config
-├── styles.css                        # All styles — WRIC-aligned tokens
+├── styles.css                        # All styles and design tokens
 ├── scripts/
 │   └── build-static.mjs              # Copies the static app into dist/
 ├── src/
@@ -62,7 +60,7 @@ The build writes to `dist/`, which is the output directory configured in `vercel
 
 ## Design system
 
-Everything lives in CSS custom properties at the top of `styles.css`. Tokens are calibrated to the WRIC example site so the workbook reads as a sibling artifact, not a stranger.
+Everything lives in CSS custom properties at the top of `styles.css`. Tokens are tuned for a warm nonprofit workbook experience.
 
 ### Color tokens
 
@@ -246,10 +244,10 @@ workbook/
 
 - **Don't invent new colors.** Every accent should come from the `:root` token block.
 - **Display copy uses Cormorant Garamond italic** for emphasis (the `<em>` inside `<h1>`, `.step-title`, `.field-prompt`, `.drill .prompt`, `.design-note h4`). Keep that pattern.
-- **Design notes should explain how answers inform the new website** and may link to the WRIC example site when useful.
+- **Design notes should explain how answers inform the new website.**
 - **The exercise column is canonical**; the design-note column is supporting commentary. Don't put inputs in the right column.
 - **Mobile-first.** Check every change at 375px before celebrating.
-- **Touch targets ≥ 44px** (WRIC's globals.css uses 44/48/52 minimums — keep this).
+- **Touch targets ≥ 44px**.
 - **Print stylesheet** at the bottom of `styles.css` hides nav/chrome; preserve it.
 
 ---
@@ -260,7 +258,7 @@ workbook/
 - [ ] Add a "Resume from email" link — magic-link auth that re-hydrates `localStorage` from the server.
 - [ ] Build a "Designer view" of the review page that's optimized for handoff (one printable page, no inputs).
 - [ ] Optional: per-section facilitator notes the chair can toggle on for board meetings.
-- [ ] Optional: a comparison view that puts the answers side-by-side with the WRIC example site, section by section.
+- [ ] Optional: a comparison view that puts the answers side-by-side with future design decisions, section by section.
 
 ---
 

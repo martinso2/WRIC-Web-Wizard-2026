@@ -133,10 +133,18 @@ function StepHeader({ num, label, title, lede }) {
 }
 
 /* ---------- FootNav ---------- */
-function FootNav({ idx, total, onPrev, onNext, onDone, steps = STEPS }) {
+function FootNav({ idx, total, onPrev, onNext, onDone, onSubmit, canProceed = true, isSubmitStep = false, steps = STEPS }) {
   const step = steps[idx];
   const next = steps[idx + 1];
   const isLast = idx === total - 1;
+  const primaryAction = isLast ? onDone : (isSubmitStep ? onSubmit : onNext);
+  const primaryLabel = idx === 0
+    ? "Begin Workbook"
+    : isSubmitStep
+      ? "Submit response"
+      : next
+        ? `Next · ${next.label}`
+        : "Done";
   return (
     <nav className="footnav" aria-label="Step navigation">
       <div className="footnav-inner">
@@ -147,8 +155,8 @@ function FootNav({ idx, total, onPrev, onNext, onDone, steps = STEPS }) {
           <span className="k">Now</span>
           <span className="v">{step.label}</span>
         </div>
-        <button type="button" className="btn btn-primary" onClick={isLast ? onDone : onNext}>
-          {idx === 0 ? "Begin Workbook" : next ? `Next · ${next.label}` : "Submit response"} →
+        <button type="button" className="btn btn-primary" onClick={primaryAction} disabled={!canProceed}>
+          {primaryLabel} →
         </button>
       </div>
     </nav>
@@ -284,10 +292,6 @@ function DesignNote({ title, children, cite, hero = false }) {
       <span className="tag">Design notes</span>
       <h4>{title}</h4>
       {children}
-      {/* <span className="ref">
-        <a href={EXAMPLE_SITE_URL} target="_blank" rel="noopener noreferrer">View the example site →</a>
-        {cite ? <span style={{ color: "var(--faint)" }}>· {cite}</span> : null}
-      </span> */}
     </aside>
   );
 }

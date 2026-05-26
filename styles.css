@@ -1,13 +1,10 @@
 /* ============================================================
    Nonprofit Website Workbook — Horizontal Wizard
-   Brand calibrated to the Women's Rights Information Center
-   (Englewood, NJ) example site. Color, type, and radius tokens
-   borrowed from WRIC's globals.css so the workbook reads as
-   a sibling artifact, not a stranger.
+   Warm editorial design system for the website workbook.
    ============================================================ */
 
 :root {
-  /* WRIC brand palette */
+  /* Brand palette */
   --navy:        #0a1d3a;
   --navy-bright: #0b3b7a;
   --navy-soft:   #1a3a64;
@@ -25,7 +22,7 @@
   --line:        #e0e4ec;
   --line-strong: #c8d0dd;
 
-  /* Watercolor accents matched to WRIC hero */
+  /* Watercolor accents */
   --wash-blue:   #cfdde7;
   --wash-deep:   #6f97b3;
 
@@ -34,7 +31,7 @@
   --sans: "Geist", "Manrope", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   --mono: "Geist Mono", ui-monospace, monospace;
 
-  /* Radius scale matches WRIC */
+  /* Radius scale */
   --r-sm: 10px;
   --r-md: 14px;
   --r-lg: 20px;
@@ -1445,11 +1442,30 @@ input::placeholder, textarea::placeholder {
   margin: 0 0 28px;
 }
 .results-panel h3 {
-  margin-top: 0;
+  margin: 0;
 }
 .results-panel p {
   color: var(--ink-soft);
   margin-top: 0;
+}
+.results-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.results-heading span {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+@media (max-width: 640px) {
+  .results-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
 }
 .results-grid {
   display: grid;
@@ -1461,23 +1477,51 @@ input::placeholder, textarea::placeholder {
   .results-grid { grid-template-columns: 1fr; }
 }
 .result-group {
+  background: rgb(11 59 122 / 3%);
+  border: 1px solid rgb(11 59 122 / 12%);
+  border-radius: var(--r-lg);
   margin-top: 18px;
+  padding: 20px;
 }
-.result-group h4 {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--coral-deep);
-  margin: 0 0 10px;
+.result-group:nth-of-type(2n) {
+  background: rgb(232 101 74 / 4%);
+  border-color: rgb(232 101 74 / 14%);
+}
+.result-group h3 {
+  font-size: 24px;
+  color: var(--ink);
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgb(11 59 122 / 12%);
+}
+.result-group:nth-of-type(2n) h3 {
+  border-bottom-color: rgb(232 101 74 / 14%);
 }
 .result-card {
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  padding: 14px;
+  border: 0;
+  border-radius: 0;
+  padding: 12px 0;
+  background: transparent;
 }
 .result-card-wide {
   margin: 0 0 12px;
+}
+.result-bundle {
+  padding: 18px;
+}
+.result-bundle .results-grid {
+  margin-top: 14px;
+}
+.result-card-nested {
+  background: transparent;
+}
+.result-row-hero {
+  align-items: center;
+  border-top: 0;
+  padding-top: 2px;
+}
+.result-row-hero strong {
+  font-size: 20px;
 }
 .result-label {
   font-size: 11px;
@@ -1488,9 +1532,11 @@ input::placeholder, textarea::placeholder {
   margin-bottom: 10px;
 }
 .result-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  justify-content: start;
+  column-gap: 18px;
+  row-gap: 4px;
   padding: 8px 0;
   border-top: 1px solid var(--line);
   color: var(--ink-soft);
@@ -1498,8 +1544,14 @@ input::placeholder, textarea::placeholder {
   line-height: 1.35;
 }
 .result-row strong {
+  align-self: start;
+  background: rgb(11 59 122 / 8%);
+  border-radius: 999px;
   color: var(--navy);
   font-variant-numeric: tabular-nums;
+  min-width: 26px;
+  padding: 1px 8px;
+  text-align: center;
 }
 
 .commitment {

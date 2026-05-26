@@ -98,7 +98,7 @@ const PRINCIPLE_QUESTIONS = {
       label: "What should the first major section do?",
       key: "onegoal_section",
       options: [
-        "Explain who WRIC helps",
+        "Explain who we help",
         "Route people to services",
         "Build donor confidence",
         "Introduce the organization",
@@ -404,7 +404,7 @@ function PrincipleStep({ principleId, data, set, note, headerNum }) {
           )}
           {!note && (
             <DesignNote
-              title={<>Why this matters for <em>Us</em></>}
+              title={<>Why this matters for <em>us</em></>}
               cite={`Design principle ${p.num}`}
             >
               <p>{p.sub}</p>
@@ -472,7 +472,7 @@ function DesignPrinciplesIntroStep() {
    DESIGN PRINCIPLES REVIEW STEP
    Summarizes all 8 principle responses.
    ============================================================ */
-function DesignPrinciplesReviewStep({ data, headerNum = "✦", showActions = true }) {
+function DesignPrinciplesReviewStep({ data, headerNum = "✦", showActions = true, showHeader = true }) {
   const get = (k) => {
     const v = data[k];
     if (Array.isArray(v)) return v.join(", ") || "— not answered —";
@@ -492,11 +492,13 @@ function DesignPrinciplesReviewStep({ data, headerNum = "✦", showActions = tru
 
   return (
     <section className="step">
-      <StepHeader
-        num={headerNum}
-        label="Design Brief"
-        title={<>What the group has <em>agreed on.</em></>}
-      />
+      {showHeader && (
+        <StepHeader
+          num={headerNum}
+          label="Design Brief"
+          title={<>What the group has <em>agreed on.</em></>}
+        />
+      )}
       <div style={{ maxWidth: "var(--max-w)", margin: "0 auto" }}>
         <div className="review-section">
           <h4>Design principles — all responses</h4>
@@ -600,21 +602,39 @@ function CoverStep({ onStart, data, set }) {
               ? <>A working guide for <em style={{fontStyle:"italic",color:"var(--navy-bright)"}}>your perspective</em></>
               : "A working guide for boards & committees"}</span>
           </div>
-          <h1>{solo ? <>Your view, before the <em>pretty website.</em></> : <>Before the <em>pretty website.</em></>}</h1>
+          <h1>Your Opinion, before the <em>pretty website.</em> </h1>
           <p className="deck">
-            {solo
-              ? <>Your honest answers help shape the website.</>
-              : <>Most nonprofit websites start with layout and colors. This workbook starts with purpose.</>}
+           Most nonprofit websites start with layout and colors. This workbook starts with purpose.
           </p>
-          {!solo && (
+          <div className="meta-row">
+            {/* <div className="item">
+              <span className="k">Format</span>
+              <span className="v">17 sections</span>
+            </div>
+            <div className="item">
+              <span className="k">Time</span>
+              <span className="v">~25 minutes</span>
+            </div>
+            <div className="item">
+              <span className="k">Output</span>
+              <span className="v">A printable brief</span>
+            </div> */}
+            {/* <div className="item">
+              <span className="k">{t.deadline ? "Due by" : "Guided by"}</span>
+              <span className="v">{t.deadline || "A new website brief"}</span>
+            </div> */}
+          </div>
+
+
+          {/* {!solo && (
             <p className="deck">
               First, decide what the site needs to do. Then turn those decisions into <em>a website design.</em>
             </p>
-          )}
+          )} */}
 
           <div className="respondent-card">
             <div className="head">
-              Your contact information
+              Your Workbook Info
               {t.senderName && <span className="sender">— requested by {t.senderName}</span>}
             </div>
             <p className="privacy-note">
@@ -637,7 +657,7 @@ function CoverStep({ onStart, data, set }) {
                        placeholder="jane@example.org" />
               </label>
               <label>
-                Your role at WRIC
+                Your role or title
                 <input type="text" value={data.respondent_role || ""}
                        onChange={e => set("respondent_role", e.target.value)}
                        placeholder="Board Vice Chair" />
@@ -645,28 +665,9 @@ function CoverStep({ onStart, data, set }) {
             </div>
           </div>
 
-          <div className="meta-row">
-            <div className="item">
-              <span className="k">Format</span>
-              <span className="v">9 sections</span>
-            </div>
-            <div className="item">
-              <span className="k">Time</span>
-              <span className="v">~25 minutes</span>
-            </div>
-            <div className="item">
-              <span className="k">Output</span>
-              <span className="v">A printable brief</span>
-            </div>
-            <div className="item">
-              <span className="k">{t.deadline ? "Due by" : "Guided by"}</span>
-              <span className="v">{t.deadline || "A new website brief"}</span>
-            </div>
-          </div>
-
           <div className="actions">
             <button type="button" className="btn btn-primary" onClick={onStart} disabled={!hasIdentity}>
-             Start here →
+              Start here →
             </button>
             {hasSavedData && (
               <button type="button" className="btn btn-ghost" onClick={startNewResponse}>
@@ -701,7 +702,7 @@ function PremiseStep() {
             cite="Website brief"
             hero={true}
           >
-            <p>Before choosing a design, agree on what the website needs to accomplish. That's what drives the design of the site</p>
+            <p>Before choosing a design, agree on what the website needs to accomplish. That's what drives the design of the site.</p>
             <p>This workbook turns your expertise into a simple brief, so the website can work alongside social media, email, brochures, and advertising instead of doing all the work alone.</p>
           </DesignNote>
       </div>
@@ -925,7 +926,7 @@ function PathwaysStep({ data, set, toggle }) {
             title={<>Why the phone number sits in the hero — <em>twice.</em></>}
             cite="Hero call-bar · English + Spanish"
           >
-            <p>The WRIC hero leads with English and Spanish phone numbers, plus staffed hours.</p>
+            <p>The hero can lead with phone numbers, language options, and staffed hours.</p>
             <p>For someone in crisis, that may be the whole reason they came.</p>
           </DesignNote>
 
@@ -941,7 +942,7 @@ function PathwaysStep({ data, set, toggle }) {
             title={<>The contact section doesn't bury <em>"Need help right now?"</em></>}
             cite="Contact · emergency block"
           >
-            <p>The contact section says what to do in an emergency, and what WRIC can handle during business hours.</p>
+            <p>The contact section should say what to do in an emergency, and what the organization can handle during business hours.</p>
             <p>That clarity builds trust.</p>
           </DesignNote>
         </aside>
@@ -972,11 +973,11 @@ function ScopeStep({ data, set, toggle }) {
               <span className="tag">Where you land</span>
               {onePagerLeans
                 ? "Strong signal: a single-page site is likely the right call."
-                : "A few extra pages may make sense, but each one needs a clear purpose and someone responsible for keeping it current-if not it just becomes cluttered, design starts to drift, and the site becomes harder to maintain and navigate."}
+                : "A few extra pages may make sense, but each one needs a clear purpose and someone responsible for keeping it current. Otherwise, the site becomes cluttered, design starts to drift, and the site becomes harder to maintain and navigate."}
             </div>
           )}
 
-          <h3>If you go one-page, it's easier to navigate and more cost effective to maintain.</h3>
+          <h3>If you go one-page, it's easier to navigate and more cost-effective to maintain.</h3>
           <p>Tick every statement that is honestly true about your website today.</p>
           <CheckList items={ONEPAGER_CHECKS} selected={data.onepager_checks || []} onToggle={v => toggle("onepager_checks", v)} single />
          
@@ -1148,7 +1149,7 @@ function ReviewStep({ data, reset }) {
 
         <div className="review-section">
           <h4>Design principles — group consensus</h4>
-          <DesignPrinciplesReviewStep data={data} showActions={false} />
+          <DesignPrinciplesReviewStep data={data} showActions={false} showHeader={false} />
         </div>
 
         <div className="export-row">
@@ -1190,13 +1191,13 @@ const UVP_RESULT_FIELDS = [
   { key: "uvp_approach", label: "What makes our approach effective" },
   { key: "uvp_proof", label: "Proof that lives are changing" },
   { key: "uvp_loss", label: "Who would feel the loss" },
-  { key: "uvp_diff", label: "What makes WRIC different" },
+  { key: "uvp_diff", label: "What makes us different" },
   { key: "uvp_feel", label: "What visitors should feel" },
 ];
 
 const SCOPE_RESULT_FIELDS = [
-  { key: "scope_checks", label: "One-page site signals" },
-  { key: "onepager_checks", label: "What a one-page site would need" },
+  { key: "scope_checks", label: "Why respondents think a one-page site may fit" },
+  { key: "onepager_checks", label: "What respondents think the one-page site must include" },
 ];
 
 const PEOPLE_RESULT_FIELDS = [
@@ -1334,27 +1335,31 @@ function ResultsSnapshot() {
 
   return (
     <div className="results-panel">
-      <h3>Group results so far</h3>
+      <div className="results-heading">
+        <h3>Group results so far</h3>
+        {!state.loading && !state.error && (
+          <span>{state.summaries.length} response{state.summaries.length === 1 ? "" : "s"} received.</span>
+        )}
+      </div>
       {state.loading && <p>Loading results...</p>}
       {!state.loading && state.error && <p>{state.error}</p>}
       {!state.loading && !state.error && (
         <>
-          <p>{state.summaries.length} response{state.summaries.length === 1 ? "" : "s"} received.</p>
           {rows.rows.length === 0 && rows.uvpRows.length === 0 && rows.scopeRows.length === 0 && rows.peopleRows.length === 0 && rows.visualRows.length === 0 ? (
             <p>No aggregate results are available yet.</p>
           ) : (
             <>
               {rows.uvpRows.length > 0 && (
                 <div className="result-group">
-                  <h4>Unique Value Proposition</h4>
+                  <h3>Unique Value Proposition</h3>
                   <div className="results-grid">
                     {rows.uvpRows.map((row) => (
                       <div className="result-card" key={row.key}>
                         <div className="result-label">{row.label}</div>
                         {row.results.map((result) => (
                           <div className="result-row" key={result.value}>
-                            <span>{result.value}</span>
                             <strong>{result.count}</strong>
+                            <span>{result.value}</span>
                           </div>
                         ))}
                       </div>
@@ -1365,41 +1370,41 @@ function ResultsSnapshot() {
 
               {rows.scopeRows.length > 0 && (
                 <div className="result-group">
-                  <h4>One-page website direction</h4>
-                  <div className="result-card result-card-wide">
-                    <div className="result-label">One-page signal</div>
-                    <div className="result-row">
-                      <span>{rows.onePageSignals} of {state.summaries.length} responses selected three or more one-page signals.</span>
+                  <h3>Is this a strong candidate for a one-page website?</h3>
+                  <div className="result-card result-card-wide result-bundle">
+                    <div className="result-label">One-page recommendation signal</div>
+                    <div className="result-row result-row-hero">
+                      <span>{rows.onePageSignals} of {state.summaries.length} responses point strongly toward a one-page website.</span>
                       <strong>{percent(rows.onePageSignals, state.summaries.length)}%</strong>
                     </div>
-                  </div>
-                  <div className="results-grid">
-                    {rows.scopeRows.map((row) => (
-                      <div className="result-card" key={row.key}>
-                        <div className="result-label">{row.label}</div>
-                        {row.results.map((result) => (
-                          <div className="result-row" key={result.value}>
-                            <span>{result.value}</span>
-                            <strong>{result.count}</strong>
-                          </div>
-                        ))}
-                      </div>
-                    ))}
+                    <div className="results-grid">
+                      {rows.scopeRows.map((row) => (
+                        <div className="result-card result-card-nested" key={row.key}>
+                          <div className="result-label">{row.label}</div>
+                          {row.results.map((result) => (
+                            <div className="result-row" key={result.value}>
+                              <strong>{result.count}</strong>
+                              <span>{result.value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}
 
               {rows.peopleRows.length > 0 && (
                 <div className="result-group">
-                  <h4>Staff and board pages</h4>
+                  <h3>Staff and board pages</h3>
                   <div className="results-grid">
                     {rows.peopleRows.map((row) => (
                       <div className="result-card" key={row.key}>
                         <div className="result-label">{row.label}</div>
                         {row.results.map((result) => (
                           <div className="result-row" key={result.value}>
-                            <span>{result.value}</span>
                             <strong>{result.count}</strong>
+                            <span>{result.value}</span>
                           </div>
                         ))}
                       </div>
@@ -1410,36 +1415,43 @@ function ResultsSnapshot() {
 
               {rows.visualRows.length > 0 && (
                 <div className="result-group">
-                  <h4>Visual priorities</h4>
-                  <div className="results-grid">
-                    {rows.visualRows.map((row) => (
-                      <div className="result-card" key={row.key}>
-                        <div className="result-label">{row.label}</div>
-                        {row.results.map((result) => (
-                          <div className="result-row" key={result.value}>
-                            <span>{result.value}</span>
-                            <strong>{result.count}</strong>
-                          </div>
-                        ))}
-                      </div>
-                    ))}
+                  <div className="result-card result-card-wide result-bundle">
+                    <h3>Visual priorities</h3>
+                    <div className="results-grid">
+                      {rows.visualRows.map((row) => (
+                        <div className="result-card result-card-nested" key={row.key}>
+                          <div className="result-label">{row.label}</div>
+                          {row.results.map((result) => (
+                            <div className="result-row" key={result.value}>
+                              <strong>{result.count}</strong>
+                              <span>{result.value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}
 
               {rows.rows.length > 0 && (
-                <div className="results-grid">
-                  {rows.rows.map((row) => (
-                    <div className="result-card" key={row.key}>
-                      <div className="result-label">{row.label}</div>
-                      {row.results.map((result) => (
-                        <div className="result-row" key={result.value}>
-                          <span>{result.value}</span>
-                          <strong>{result.count}</strong>
+                <div className="result-group">
+                  <div className="result-card result-card-wide result-bundle">
+                    <h3>Website priorities</h3>
+                    <div className="results-grid">
+                      {rows.rows.map((row) => (
+                        <div className="result-card result-card-nested" key={row.key}>
+                          <div className="result-label">{row.label}</div>
+                          {row.results.map((result) => (
+                            <div className="result-row" key={result.value}>
+                              <strong>{result.count}</strong>
+                              <span>{result.value}</span>
+                            </div>
+                          ))}
                         </div>
                       ))}
                     </div>
-                  ))}
+                  </div>
                 </div>
               )}
             </>
@@ -1450,45 +1462,16 @@ function ResultsSnapshot() {
   );
 }
 
-function CloseStep({ data }) {
+function CloseStep({ data, headerNum = "✦" }) {
   return (
     <section className="step">
       <StepHeader
-        num="✦" label="The Commitment"
-        title={<>Your website cannot do <em>everything.</em></>}
+        num={headerNum} label="Complete"
+        title={<>Thanks for your input. <em>Your responses have been saved.</em></>}
       />
 
-      <div className="step-body">
-        <div className="exercise">
-          <ResultsSnapshot />
-
-          <h3>Where the rest of the content goes</h3>
-          <div className="channel-grid">
-            {CHANNELS.map(c => (
-              <div className="channel-card" key={c.name}>
-                <div className="ico">✦</div>
-                <div className="name">{c.name}</div>
-                <div className="use">{c.use}</div>
-              </div>
-            ))}
-          </div>
-
-          <p>Before adding a page, ask whether the website is the best place for that audience to find it.</p>
-
-          <p className="attribution">
-            Adapted from <em>Stop Building Pretty Websites. Start Building Websites That Raise Money.</em> by Harry Martin.
-          </p>
-        </div>
-
-        <aside className="notes-col">
-          <DesignNote
-            title={<>Why the new website can stay <em>focused</em>.</>}
-            cite="The whole site"
-          >
-            <p>A focused site leaves out archives, PDF dumps, and stale press pages.</p>
-            <p>Content that belongs elsewhere is routed elsewhere.</p>
-          </DesignNote>
-        </aside>
+      <div className="full-width-note">
+        <ResultsSnapshot />
       </div>
     </section>
   );
@@ -1592,31 +1575,35 @@ function App() {
       principleId: p.id,
       num: String(i + 9).padStart(2, "0"),
     }));
+    const reviewIndex = STEPS.findIndex(s => s.kind === "review");
+    const tailSteps = STEPS.slice(reviewIndex).map(step => (
+      step.kind === "close" ? { ...step, num: "17" } : step
+    ));
 
     return [
-      ...STEPS.slice(0, STEPS.findIndex(s => s.kind === "review")),
+      ...STEPS.slice(0, reviewIndex),
       { id: "design_intro", label: "Design", kind: "design_intro", num: "08" },
       ...principleSteps,
-      { id: "design_brief", label: "Design Brief", kind: "design_brief", num: "17" },
-      ...STEPS.slice(STEPS.findIndex(s => s.kind === "review")),
+      ...tailSteps,
     ];
   }, []);
 
   /* Filter steps based on depth tweak */
   const activeSteps = React.useMemo(() => {
+    const withoutReview = (steps) => steps.filter(s => s.kind !== "review");
+
     if (t.depth === "essentials") {
-      return ALL_STEPS.filter(s => ESSENTIALS_STEP_IDS.includes(s.id));
+      return withoutReview(ALL_STEPS.filter(s => ESSENTIALS_STEP_IDS.includes(s.id)));
     }
     if (t.depth === "design") {
-      return ALL_STEPS.filter(s =>
+      return withoutReview(ALL_STEPS.filter(s =>
         s.kind === "cover" ||
         s.kind === "design_intro" ||
         s.kind === "principle" ||
-        s.kind === "design_brief" ||
         s.kind === "review"
-      );
+      ));
     }
-    return ALL_STEPS;
+    return withoutReview(ALL_STEPS);
   }, [t.depth, ALL_STEPS]);
 
   const [idx, setIdx] = React.useState(() => {
@@ -1640,15 +1627,32 @@ function App() {
   };
 
   const step = activeSteps[idx] || activeSteps[0];
-  const onNext = () => setIdx(i => Math.min(activeSteps.length - 1, i + 1));
+  const hasIdentity = (wb.data.respondent_name || "").trim()
+    && (wb.data.respondent_email || "").trim()
+    && (wb.data.respondent_role || "").trim();
+  const canProceed = step.kind !== "cover" || !!hasIdentity;
+  const onNext = () => {
+    if (!canProceed) return;
+    setIdx(i => Math.min(activeSteps.length - 1, i + 1));
+  };
   const onPrev = () => setIdx(i => Math.max(0, i - 1));
-  const onDone = () => {
+  const saveResponse = () => {
     if (!window.WorkbookFirebase || Object.keys(wb.data).length === 0) {
-      alert("Your response is saved locally in this browser.");
-      return;
+      return Promise.resolve(false);
     }
 
-    window.WorkbookFirebase.save(wb.data)
+    return window.WorkbookFirebase.save(wb.data);
+  };
+  const onSubmit = () => {
+    saveResponse()
+      .then(() => setIdx(i => Math.min(activeSteps.length - 1, i + 1)))
+      .catch((error) => {
+        const message = error && (error.code || error.message) ? `\n\n${error.code || error.message}` : "";
+        alert(`We could not save to Firebase. Your response is still saved locally in this browser.${message}`);
+      });
+  };
+  const onDone = () => {
+    saveResponse()
       .then(() => {
         alert("Your response has been saved.");
       })
@@ -1661,9 +1665,8 @@ function App() {
   const renderStep = () => {
     if (step.kind === "cover")        return <CoverStep onStart={onNext} data={wb.data} set={wb.set} />;
     if (step.kind === "review")       return <ReviewStep data={wb.data} reset={wb.reset} />;
-    if (step.kind === "close")        return <CloseStep data={wb.data} />;
+    if (step.kind === "close")        return <CloseStep data={wb.data} headerNum={step.num || String(idx).padStart(2, "0")} />;
     if (step.kind === "design_intro") return <DesignPrinciplesIntroStep />;
-    if (step.kind === "design_brief") return <DesignPrinciplesReviewStep data={wb.data} headerNum={step.num} />;
     if (step.kind === "principle") {
       return (
         <PrincipleStep
@@ -1688,7 +1691,7 @@ function App() {
   };
 
   return (
-    <TweakCtx.Provider value={{ ...t, stepHeaderTotal: activeSteps.length }}>
+    <TweakCtx.Provider value={{ ...t, stepHeaderTotal: activeSteps.filter(s => s.num).length }}>
       <div
         className="app"
         data-notes={t.showDesignNotes ? "on" : "off"}
@@ -1698,7 +1701,17 @@ function App() {
         <TopBar />
         <Stepper idx={idx} onJump={(i) => setIdx(i)} steps={activeSteps} />
         <main className="main">{renderStep()}</main>
-        <FootNav idx={idx} total={activeSteps.length} steps={activeSteps} onPrev={onPrev} onNext={onNext} onDone={onDone} />
+        <FootNav
+          idx={idx}
+          total={activeSteps.length}
+          steps={activeSteps}
+          onPrev={onPrev}
+          onNext={onNext}
+          onDone={onDone}
+          onSubmit={onSubmit}
+          canProceed={canProceed}
+          isSubmitStep={activeSteps[idx + 1] && activeSteps[idx + 1].kind === "close"}
+        />
         <WorkbookTweaks t={t} setTweak={setTweak} />
       </div>
     </TweakCtx.Provider>

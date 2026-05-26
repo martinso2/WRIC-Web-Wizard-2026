@@ -6,8 +6,6 @@
 /* eslint-disable */
 
 const STORAGE_KEY = "nonprofit-workbook-v2";
-const EXAMPLE_SITE_URL  = "https://womens-rights-information-center.vercel.app/";
-const EXAMPLE_SITE_NAME = "Women's Rights Information Center";
 
 /* ─── Sender-configurable tweaks ────────────────────────────────────────
    The chair / sender opens the Tweaks panel to configure these BEFORE
@@ -123,11 +121,11 @@ const FIRST_TEN_SECONDS = [
   "What language(s) we offer",
   "Hours we're actually reachable",
   "A clear, gentle path for someone in crisis",
-  "Reassurance that seeking services is judgement-free here",
+  "Reassurance that seeking services is judgment-free here",
 ];
 
 const PATHWAY_NEW_CLIENT = [
-  "Call WRIC",
+  "Call us",
   "Complete a short intake form",
   "Request an appointment",
   "Find eligibility requirements",
@@ -162,11 +160,11 @@ const TRUST_SIGNALS = [
 ];
 
 const SCOPE_CHECKS = [
-  "We have a small staff or are a young organization",
+  "We have a relatively small staff and are better served assisting clients",
   "Our programs are simple enough to explain in 3-4 lines",
   "We update news, events, or program details weekly",
   "We don't have a content manager or web person who can maintain pages weekly",
-  "We have staff people who are experts in designing and updating our website",
+  "We have staff who are experts in designing and updating our website",
   "Our primary action is donate, sign up, or contact",
 ];
 
@@ -199,7 +197,7 @@ const SHOT_LIST = [
   "The people we serve (with consent) — faces, hands, success stories",
   "The place — our space, our neighborhood, our table",
   "Outcomes, not infographics — what \"after\" looks like",
-  "Behind-the-scenes staff members doing the work no stock-photos",
+  "Behind-the-scenes staff members doing the work, not stock photos",
 ];
 
 const CHANNELS = [
@@ -217,7 +215,7 @@ const ESSENTIALS_STEP_IDS = ["cover", "premise", "uvp", "onejob", "pathways", "r
 
 /* Expose to other scripts (Babel script scopes don't share by default) */
 Object.assign(window, {
-  STORAGE_KEY, EXAMPLE_SITE_URL, EXAMPLE_SITE_NAME, TWEAK_DEFAULTS, ESSENTIALS_STEP_IDS,
+  STORAGE_KEY, TWEAK_DEFAULTS, ESSENTIALS_STEP_IDS,
   STEPS, UVP_DRILLS, PRIMARY_GOALS, DISCOVERY_CHANNELS,
   FIRST_TEN_SECONDS, PATHWAY_NEW_CLIENT, PATHWAY_POTENTIAL_DONOR, PATHWAY_EXISTING_CLIENT,
   TRUST_SIGNALS, SCOPE_CHECKS, ONEPAGER_CHECKS,
