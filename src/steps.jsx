@@ -681,7 +681,6 @@ function CoverStep({ onStart, data, set }) {
 
         <div className="cover-art">
           <img src="./assets/hero-women-2.jpg" alt="Watercolor portraits of women in profile, layered in shades of blue and teal." />
-          <span className="credit">Example site hero · WRIC</span>
         </div>
       </div>
     </section>
