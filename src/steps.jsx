@@ -404,7 +404,7 @@ function PrincipleStep({ principleId, data, set, note, headerNum }) {
           )}
           {!note && (
             <DesignNote
-              title={<>Why this matters for <em>WRIC.</em></>}
+              title={<>Why this matters for <em>Us</em></>}
               cite={`Design principle ${p.num}`}
             >
               <p>{p.sub}</p>
@@ -431,8 +431,9 @@ function DesignPrinciplesIntroStep() {
       <div className="design-principles-layout">
         <div className="note golden-rule">
           <span className="tag">Golden rule</span>
-          <p>People scan first, decide emotionally, validate rationally, and act only when friction is low. These principles are about how people actually consume websites.</p>
           <p>Can someone understand it in 5 seconds, trust it in 15 seconds, and act in 30 seconds? If not, simplify.</p>
+          <p>People scan first, decide emotionally, validate rationally, and act only when friction is low. These principles are about how people actually consume websites.</p>
+         
         </div>
 
         <h3>The 8 principles</h3>
@@ -458,8 +459,8 @@ function DesignPrinciplesIntroStep() {
             cite="Design direction"
             hero={true}
           >
-            <p>Each principle helps translate staff and board input into practical website decisions.</p>
-            <p>Your job is to confirm, refine, or redirect the direction before design work gets locked in.</p>
+            <p>Each principle helps translate your input into practical website decisions.</p>
+            <p>Your job is to confirm, refine, and direct the content of the website before design work gets locked in.</p>
           </DesignNote>
         </div>
       </div>
@@ -536,7 +537,7 @@ const PRINCIPLE_NOTES = {
     body: <p>If a section has competing messages, visitors have to decide what matters. Many will choose none.</p>,
   },
   mobile: {
-    title: <>The new website should be built <em>phone-first.</em></>,
+    title: <>The new website should be built <em>mobile-first.</em></>,
     cite: "Mobile",
     body: <p>Smaller screens force clarity. Tap targets, phone links, short forms, and readable text matter more than decorative complexity.</p>,
   },
@@ -558,7 +559,7 @@ const PRINCIPLE_NOTES = {
   trust: {
     title: <>Trust is built before the details.</>,
     cite: "Credibility",
-    body: <p>People judge credibility quickly. Consistent visuals, real proof, clear language, and visible people help the website feel trustworthy.</p>,
+    body: <p>People judge credibility quickly. Consistent visuals, real proof, and clear language, help the website feel trustworthy.</p>,
   },
   whitespace: {
     title: <>Use <em>generous spacing</em> to make choices clearer.</>,
@@ -575,6 +576,20 @@ const PRINCIPLE_NOTES = {
 function CoverStep({ onStart, data, set }) {
   const t = useTweakValues();
   const solo = t.mode === "solo";
+  const hasIdentity = (data.respondent_name || "").trim()
+    && (data.respondent_email || "").trim()
+    && (data.respondent_role || "").trim();
+  const hasSavedData = Object.keys(data || {}).length > 0;
+  const startNewResponse = () => {
+    if (!confirm("Clear the saved answers in this browser and start a new response?")) return;
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem("nonprofit-workbook-v2-idx");
+    if (window.WorkbookFirebase) {
+      window.WorkbookFirebase.resetResponseId();
+    }
+    location.reload();
+  };
+
   return (
     <section className="step">
       <div className="cover">
@@ -588,12 +603,12 @@ function CoverStep({ onStart, data, set }) {
           <h1>{solo ? <>Your view, before the <em>pretty website.</em></> : <>Before the <em>pretty website.</em></>}</h1>
           <p className="deck">
             {solo
-              ? <>Your honest answers help shape the brief.</>
+              ? <>Your honest answers help shape the website.</>
               : <>Most nonprofit websites start with layout and colors. This workbook starts with purpose.</>}
           </p>
           {!solo && (
             <p className="deck">
-              First, decide what the site needs to do. Then turn those decisions into <em>a brief.</em>
+              First, decide what the site needs to do. Then turn those decisions into <em>a website design.</em>
             </p>
           )}
 
@@ -604,6 +619,9 @@ function CoverStep({ onStart, data, set }) {
             </div>
             <p className="privacy-note">
               Your responses will be kept confidential. Name and email are collected only so the survey results can be organized and shared back with the group.
+            </p>
+            <p className="privacy-note">
+              This is your survey sign-in. No password or magic link is required.
             </p>
             <div className="row">
               <label>
@@ -634,7 +652,7 @@ function CoverStep({ onStart, data, set }) {
             </div>
             <div className="item">
               <span className="k">Time</span>
-              <span className="v">~45 minutes</span>
+              <span className="v">~25 minutes</span>
             </div>
             <div className="item">
               <span className="k">Output</span>
@@ -647,14 +665,22 @@ function CoverStep({ onStart, data, set }) {
           </div>
 
           <div className="actions">
-            <button type="button" className="btn btn-primary" onClick={onStart}>
+            <button type="button" className="btn btn-primary" onClick={onStart} disabled={!hasIdentity}>
              Start here →
             </button>
+            {hasSavedData && (
+              <button type="button" className="btn btn-ghost" onClick={startNewResponse}>
+                Start a new blank response
+              </button>
+            )}
           </div>
+          {!hasIdentity && (
+            <p className="privacy-note">Enter your name, email, and role to begin.</p>
+          )}
         </div>
 
         <div className="cover-art">
-          <img src="./assets/hero-women.jpeg" alt="Watercolor portraits of women in profile, layered in shades of blue and teal." />
+          <img src="./assets/hero-women-2.jpg" alt="Watercolor portraits of women in profile, layered in shades of blue and teal." />
           <span className="credit">Example site hero · WRIC</span>
         </div>
       </div>
@@ -676,9 +702,8 @@ function PremiseStep() {
             cite="Website brief"
             hero={true}
           >
-            <p>This workbook helps staff and board members turn individual judgment into a shared website brief. Work through the questions in order, choose the answers that feel closest, and do not worry about perfect wording.</p>
-            <p>Before choosing a design, agree on what the website needs to accomplish. It should help donors give, help clients seek services, and help the wider community understand your mission.</p>
-            <p>This workbook turns those decisions into a simple brief, so the website can work alongside social media, email, brochures, and advertising instead of doing all the work alone.</p>
+            <p>Before choosing a design, agree on what the website needs to accomplish. That's what drives the design of the site</p>
+            <p>This workbook turns your expertise into a simple brief, so the website can work alongside social media, email, brochures, and advertising instead of doing all the work alone.</p>
           </DesignNote>
       </div>
     </section>
@@ -693,11 +718,11 @@ function UvpStep({ data, set }) {
     <section className="step">
       <StepHeader
         num="02" label="Unique Value"
-        title={<>Find your <em>UVP</em> — before anything else.</>}
+        title={<>Find your <em>Unique Value Proposition.</em> It drives content!</>}
       />
       <div className="step-body">
         <div className="exercise">
-          {solo ? (
+          {/* {solo ? (
             <div className="warn">
               <span className="tag">Ground rule</span>
               <strong>Answer first, refine later.</strong>
@@ -707,11 +732,10 @@ function UvpStep({ data, set }) {
               <span className="tag">Ground rule</span>
               <strong>No critiques during the first pass.</strong> Capture ideas first, refine after.
             </div>
-          )}
+          )} */}
 
           <h3>Six clarity drills</h3>
-          <p>Choose the answer that feels closest. The group can compare patterns later.</p>
-
+          <p>Choose the answer that feels closest and makes the most sense for your organization.</p>
           <div className="drills">
             {UVP_DRILLS.map((d, i) => (
               <div className="drill" key={d.id}>
@@ -735,8 +759,8 @@ function UvpStep({ data, set }) {
             title={<>Turn the UVP into a <em>plain promise.</em></>}
             cite="Hero + services"
           >
-            <p>The strongest homepage message is usually short, direct, and useful to the visitor.</p>
-            <p>If the answer sounds like a mission statement, make it plainer.</p>
+            <p>The strongest homepage message is usually short, direct, and compelling.</p>
+            <p>If the message sounds like a mission statement, it won't resonate.</p>
           </DesignNote>
         </aside>
       </div>

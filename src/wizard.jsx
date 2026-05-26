@@ -280,7 +280,7 @@ function DesignNote({ title, children, cite, hero = false }) {
   if (!t.showDesignNotes) return null;
   return (
     <aside className="design-note">
-      {hero && <div className="dn-preview" style={{ backgroundImage: "url(./assets/hero-women.jpeg)" }} />}
+      {hero && <div className="dn-preview" style={{ backgroundImage: "url(./assets/hero-women-2.jpg)" }} />}
       <span className="tag">Design notes</span>
       <h4>{title}</h4>
       {children}

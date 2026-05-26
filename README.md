@@ -22,7 +22,7 @@ A horizontal, responsive wizard that walks a nonprofit board or working group th
 │   ├── firebase-sync.js              # Firebase Realtime Database sync
 │   └── steps.jsx                     # Per-step content + App + mount
 ├── assets/
-│   └── hero-women.jpeg               # Watercolor portraits hero (1456×816)
+│   └── hero-women-2.jpg              # Watercolor portraits hero
 └── README.md                         # This file
 ```
 
@@ -199,7 +199,7 @@ The current deploy path is a static Vercel app. If the workbook later needs serv
 4. **Pages:** Single page at `app/page.tsx` rendering `<Wizard />`. The wizard owns step-index state.
 5. **Persistence:** Replace `localStorage` shim with a `useWorkbook` hook that runs only on the client (`"use client"` directive on the wizard root).
 6. **Fonts:** Use `next/font/google` for Cormorant Garamond + Geist.
-7. **Assets:** Move `assets/*` to `public/` and reference as `/hero-women.jpeg` etc.
+7. **Assets:** Move `assets/*` to `public/` and reference as `/hero-women-2.jpg` etc.
 8. **Print/PDF:** `window.print()` still works; or use `@react-pdf/renderer` for a more polished export.
 
 Suggested file structure after porting:
@@ -237,7 +237,7 @@ workbook/
 │   ├── useWorkbook.ts             # State + localStorage hook
 │   └── types.ts                   # WorkbookData type
 └── public/
-    └── hero-women.jpeg
+    └── hero-women-2.jpg
 ```
 
 ---
