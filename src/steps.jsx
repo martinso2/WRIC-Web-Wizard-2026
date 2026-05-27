@@ -133,13 +133,13 @@ const PRINCIPLE_QUESTIONS = {
   },
   decisions: {
     mc: {
-      label: "Where can the new website reduce choices?",
+      label: "Where does the website most need to simplify the visitor's decision?",
       key: "decisions_reduce",
       options: [
-        "Navigation",
-        "Homepage calls to action",
-        "Service descriptions",
-        "Donation flow",
+        "Make the main navigation simpler",
+        "Make the primary call to action clearer",
+        "Make service choices easier to understand",
+        "Make the donation path easier to complete",
       ],
     },
   },
@@ -606,31 +606,6 @@ function CoverStep({ onStart, data, set }) {
           <p className="deck">
            Most nonprofit websites start with layout and colors. This workbook starts with purpose.
           </p>
-          <div className="meta-row">
-            {/* <div className="item">
-              <span className="k">Format</span>
-              <span className="v">17 sections</span>
-            </div>
-            <div className="item">
-              <span className="k">Time</span>
-              <span className="v">~25 minutes</span>
-            </div>
-            <div className="item">
-              <span className="k">Output</span>
-              <span className="v">A printable brief</span>
-            </div> */}
-            {/* <div className="item">
-              <span className="k">{t.deadline ? "Due by" : "Guided by"}</span>
-              <span className="v">{t.deadline || "A new website brief"}</span>
-            </div> */}
-          </div>
-
-
-          {/* {!solo && (
-            <p className="deck">
-              First, decide what the site needs to do. Then turn those decisions into <em>a website design.</em>
-            </p>
-          )} */}
 
           <div className="respondent-card">
             <div className="head">
@@ -702,7 +677,7 @@ function PremiseStep() {
             cite="Website brief"
             hero={true}
           >
-            <p>Before choosing a design, agree on what the website needs to accomplish. That's what drives the design of the site.</p>
+            <p>Before choosing a design, it is best to agree on what the website needs to accomplish. That's what drives the design of the site.</p>
             <p>This workbook turns your expertise into a simple brief, so the website can work alongside social media, email, brochures, and advertising instead of doing all the work alone.</p>
           </DesignNote>
       </div>
@@ -722,20 +697,9 @@ function UvpStep({ data, set }) {
       />
       <div className="step-body">
         <div className="exercise">
-          {/* {solo ? (
-            <div className="warn">
-              <span className="tag">Ground rule</span>
-              <strong>Answer first, refine later.</strong>
-            </div>
-          ) : (
-            <div className="warn">
-              <span className="tag">Ground rule</span>
-              <strong>No critiques during the first pass.</strong> Capture ideas first, refine after.
-            </div>
-          )} */}
 
           <h3>Six clarity drills</h3>
-          <p>Choose the answer that feels closest and makes the most sense for your organization.</p>
+          <p>Choose the answer that feels closest and makes the most sense for the organization.</p>
           <div className="drills">
             {UVP_DRILLS.map((d, i) => (
               <div className="drill" key={d.id}>
@@ -798,7 +762,7 @@ function OneJobStep({ data, set }) {
     <section className="step">
       <StepHeader
         num="03" label="One Job"
-        title={<>What is the website's <em>one job?</em></>}
+        title={<>If your website could do only one thing, <em>what would it be?</em></>}
       />
       <div className="step-body">
         <div className="exercise">
@@ -1183,7 +1147,7 @@ const RESULT_FIELDS = [
   { key: "path_donor_action", label: "What potential donors need" },
   { key: "path_existing_action", label: "What existing clients need" },
   { key: "attention_first", label: "What visitors should notice first" },
-  { key: "decisions_reduce", label: "Where the website can reduce choices" },
+  { key: "decisions_reduce", label: "Where the website needs to simplify decisions" },
 ];
 
 const UVP_RESULT_FIELDS = [

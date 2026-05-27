@@ -12,7 +12,7 @@
       }
     },
     "publicResponseSummaries": {
-      ".read": "auth != null",
+      ".read": true,
       "$uid": {
         "$responseId": {
           ".write": "auth != null && auth.uid === $uid",

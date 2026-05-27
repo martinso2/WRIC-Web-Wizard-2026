@@ -107,7 +107,6 @@
   };
 
   const getPublicSummaries = async () => {
-    await authReady;
     const snapshot = await database.ref("publicResponseSummaries").once("value");
     const summaries = [];
     const byUser = snapshot.val() || {};
